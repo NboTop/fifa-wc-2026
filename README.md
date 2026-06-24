@@ -79,6 +79,7 @@ Open `http://localhost:5174` for the dashboard, `http://localhost:8000/docs` for
 
 ## Project Structure
 
+```text
 wc2026-intelligence/
 ├── backend/
 │   ├── app/
@@ -96,6 +97,7 @@ wc2026-intelligence/
         │   ├── Dashboard.vue
         │   └── Players.vue
         └── components/
+```
 
 
 ## Built by
