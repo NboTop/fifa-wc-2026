@@ -80,38 +80,22 @@ Open `http://localhost:5174` for the dashboard, `http://localhost:8000/docs` for
 ## Project Structure
 
 wc2026-intelligence/
-
 ├── backend/
-
 │   ├── app/
-
-│   │   ├── main.py              # FastAPI app
-
+│   │   ├── main.py
 │   │   ├── engines/
-
-│   │   │   ├── predictor.py     # Engine 1 wrapper
-
-│   │   │   └── players.py       # Engine 2 wrapper
-
+│   │   │   ├── predictor.py
+│   │   │   └── players.py
 │   │   └── routers/
-
-│   │       ├── predictions.py   # Match prediction endpoints
-
-│   │       └── players.py       # Player data endpoints
-
-│   └── models/                  # pkl files + CSV predictions tracker
-
+│   │       ├── predictions.py
+│   │       └── players.py
+│   └── models/
 └── frontend/
-
-└── src/
-
-├── views/
-
-│   ├── Dashboard.vue    # Match intelligence + live predictor
-
-│   └── Players.vue      # Player archetypes + team explorer
-
-└── components/
+    └── src/
+        ├── views/
+        │   ├── Dashboard.vue
+        │   └── Players.vue
+        └── components/
 
 
 ## Built by
