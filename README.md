@@ -78,22 +78,39 @@ Open `http://localhost:5174` for the dashboard, `http://localhost:8000/docs` for
 > **Note:** Model files (`.pkl`) are not included in the repo due to file size. Regenerate them by running the Colab notebooks linked in the `/notebooks` section.
 
 ## Project Structure
+
 wc2026-intelligence/
+
 ├── backend/
+
 │   ├── app/
+
 │   │   ├── main.py              # FastAPI app
+
 │   │   ├── engines/
+
 │   │   │   ├── predictor.py     # Engine 1 wrapper
+
 │   │   │   └── players.py       # Engine 2 wrapper
+
 │   │   └── routers/
+
 │   │       ├── predictions.py   # Match prediction endpoints
+
 │   │       └── players.py       # Player data endpoints
+
 │   └── models/                  # pkl files + CSV predictions tracker
+
 └── frontend/
+
 └── src/
+
 ├── views/
+
 │   ├── Dashboard.vue    # Match intelligence + live predictor
+
 │   └── Players.vue      # Player archetypes + team explorer
+
 └── components/
 
 
