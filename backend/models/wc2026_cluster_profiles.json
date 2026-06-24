@@ -1,0 +1,56 @@
+{
+  "Pacey Dribbler": {
+    "pace": 74.2,
+    "shooting": 59.7,
+    "passing": 59.8,
+    "dribbling": 67.5,
+    "defending": 36.5,
+    "physic": 52.9,
+    "count": 1526
+  },
+  "Defensive Anchor": {
+    "pace": 69.7,
+    "shooting": 47.3,
+    "passing": 59.0,
+    "dribbling": 63.3,
+    "defending": 62.5,
+    "physic": 67.4,
+    "count": 2598
+  },
+  "Deep Playmaker": {
+    "pace": 67.4,
+    "shooting": 62.6,
+    "passing": 69.7,
+    "dribbling": 71.5,
+    "defending": 67.5,
+    "physic": 72.2,
+    "count": 1958
+  },
+  "Defensive Anchor II": {
+    "pace": 57.8,
+    "shooting": 33.9,
+    "passing": 48.3,
+    "dribbling": 51.2,
+    "defending": 65.8,
+    "physic": 71.7,
+    "count": 1589
+  },
+  "Pacey Dribbler II": {
+    "pace": 79.4,
+    "shooting": 70.4,
+    "passing": 68.9,
+    "dribbling": 75.5,
+    "defending": 42.8,
+    "physic": 65.4,
+    "count": 1228
+  },
+  "Target Striker": {
+    "pace": 68.5,
+    "shooting": 65.3,
+    "passing": 53.1,
+    "dribbling": 63.5,
+    "defending": 30.1,
+    "physic": 69.1,
+    "count": 1053
+  }
+}

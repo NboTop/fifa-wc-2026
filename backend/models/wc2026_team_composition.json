@@ -1,0 +1,1250 @@
+{
+  "Mexico": {
+    "Pacey Dribbler": {
+      "count": 3,
+      "pct": 8.8
+    },
+    "Defensive Anchor": {
+      "count": 7,
+      "pct": 20.6
+    },
+    "Deep Playmaker": {
+      "count": 8,
+      "pct": 23.5
+    },
+    "Defensive Anchor II": {
+      "count": 4,
+      "pct": 11.8
+    },
+    "Pacey Dribbler II": {
+      "count": 10,
+      "pct": 29.4
+    },
+    "Target Striker": {
+      "count": 2,
+      "pct": 5.9
+    }
+  },
+  "South Africa": {
+    "Pacey Dribbler": {
+      "count": 5,
+      "pct": 35.7
+    },
+    "Defensive Anchor": {
+      "count": 3,
+      "pct": 21.4
+    },
+    "Deep Playmaker": {
+      "count": 2,
+      "pct": 14.3
+    },
+    "Defensive Anchor II": {
+      "count": 2,
+      "pct": 14.3
+    },
+    "Pacey Dribbler II": {
+      "count": 2,
+      "pct": 14.3
+    },
+    "Target Striker": {
+      "count": 0,
+      "pct": 0.0
+    }
+  },
+  "Korea Republic": {
+    "Pacey Dribbler": {
+      "count": 27,
+      "pct": 12.0
+    },
+    "Defensive Anchor": {
+      "count": 82,
+      "pct": 36.4
+    },
+    "Deep Playmaker": {
+      "count": 19,
+      "pct": 8.4
+    },
+    "Defensive Anchor II": {
+      "count": 47,
+      "pct": 20.9
+    },
+    "Pacey Dribbler II": {
+      "count": 21,
+      "pct": 9.3
+    },
+    "Target Striker": {
+      "count": 29,
+      "pct": 12.9
+    }
+  },
+  "Czechia": {
+    "Pacey Dribbler": {
+      "count": 5,
+      "pct": 6.6
+    },
+    "Defensive Anchor": {
+      "count": 12,
+      "pct": 15.8
+    },
+    "Deep Playmaker": {
+      "count": 30,
+      "pct": 39.5
+    },
+    "Defensive Anchor II": {
+      "count": 7,
+      "pct": 9.2
+    },
+    "Pacey Dribbler II": {
+      "count": 15,
+      "pct": 19.7
+    },
+    "Target Striker": {
+      "count": 7,
+      "pct": 9.2
+    }
+  },
+  "Canada": {
+    "Pacey Dribbler": {
+      "count": 2,
+      "pct": 3.6
+    },
+    "Defensive Anchor": {
+      "count": 15,
+      "pct": 26.8
+    },
+    "Deep Playmaker": {
+      "count": 10,
+      "pct": 17.9
+    },
+    "Defensive Anchor II": {
+      "count": 13,
+      "pct": 23.2
+    },
+    "Pacey Dribbler II": {
+      "count": 8,
+      "pct": 14.3
+    },
+    "Target Striker": {
+      "count": 8,
+      "pct": 14.3
+    }
+  },
+  "Bosnia and Herzegovina": {
+    "Pacey Dribbler": {
+      "count": 5,
+      "pct": 10.0
+    },
+    "Defensive Anchor": {
+      "count": 9,
+      "pct": 18.0
+    },
+    "Deep Playmaker": {
+      "count": 9,
+      "pct": 18.0
+    },
+    "Defensive Anchor II": {
+      "count": 11,
+      "pct": 22.0
+    },
+    "Pacey Dribbler II": {
+      "count": 7,
+      "pct": 14.0
+    },
+    "Target Striker": {
+      "count": 9,
+      "pct": 18.0
+    }
+  },
+  "Qatar": {
+    "Pacey Dribbler": {
+      "count": 4,
+      "pct": 16.0
+    },
+    "Defensive Anchor": {
+      "count": 11,
+      "pct": 44.0
+    },
+    "Deep Playmaker": {
+      "count": 4,
+      "pct": 16.0
+    },
+    "Defensive Anchor II": {
+      "count": 2,
+      "pct": 8.0
+    },
+    "Pacey Dribbler II": {
+      "count": 2,
+      "pct": 8.0
+    },
+    "Target Striker": {
+      "count": 2,
+      "pct": 8.0
+    }
+  },
+  "Switzerland": {
+    "Pacey Dribbler": {
+      "count": 23,
+      "pct": 14.1
+    },
+    "Defensive Anchor": {
+      "count": 44,
+      "pct": 27.0
+    },
+    "Deep Playmaker": {
+      "count": 32,
+      "pct": 19.6
+    },
+    "Defensive Anchor II": {
+      "count": 25,
+      "pct": 15.3
+    },
+    "Pacey Dribbler II": {
+      "count": 19,
+      "pct": 11.7
+    },
+    "Target Striker": {
+      "count": 20,
+      "pct": 12.3
+    }
+  },
+  "Brazil": {
+    "Pacey Dribbler": {
+      "count": 88,
+      "pct": 14.2
+    },
+    "Defensive Anchor": {
+      "count": 140,
+      "pct": 22.6
+    },
+    "Deep Playmaker": {
+      "count": 122,
+      "pct": 19.7
+    },
+    "Defensive Anchor II": {
+      "count": 72,
+      "pct": 11.6
+    },
+    "Pacey Dribbler II": {
+      "count": 123,
+      "pct": 19.8
+    },
+    "Target Striker": {
+      "count": 75,
+      "pct": 12.1
+    }
+  },
+  "Morocco": {
+    "Pacey Dribbler": {
+      "count": 22,
+      "pct": 18.0
+    },
+    "Defensive Anchor": {
+      "count": 19,
+      "pct": 15.6
+    },
+    "Deep Playmaker": {
+      "count": 27,
+      "pct": 22.1
+    },
+    "Defensive Anchor II": {
+      "count": 12,
+      "pct": 9.8
+    },
+    "Pacey Dribbler II": {
+      "count": 32,
+      "pct": 26.2
+    },
+    "Target Striker": {
+      "count": 10,
+      "pct": 8.2
+    }
+  },
+  "Haiti": {
+    "Pacey Dribbler": {
+      "count": 3,
+      "pct": 30.0
+    },
+    "Defensive Anchor": {
+      "count": 4,
+      "pct": 40.0
+    },
+    "Deep Playmaker": {
+      "count": 2,
+      "pct": 20.0
+    },
+    "Defensive Anchor II": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Pacey Dribbler II": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Target Striker": {
+      "count": 1,
+      "pct": 10.0
+    }
+  },
+  "Scotland": {
+    "Pacey Dribbler": {
+      "count": 33,
+      "pct": 16.3
+    },
+    "Defensive Anchor": {
+      "count": 63,
+      "pct": 31.0
+    },
+    "Deep Playmaker": {
+      "count": 42,
+      "pct": 20.7
+    },
+    "Defensive Anchor II": {
+      "count": 28,
+      "pct": 13.8
+    },
+    "Pacey Dribbler II": {
+      "count": 11,
+      "pct": 5.4
+    },
+    "Target Striker": {
+      "count": 26,
+      "pct": 12.8
+    }
+  },
+  "United States": {
+    "Pacey Dribbler": {
+      "count": 33,
+      "pct": 12.9
+    },
+    "Defensive Anchor": {
+      "count": 81,
+      "pct": 31.8
+    },
+    "Deep Playmaker": {
+      "count": 45,
+      "pct": 17.6
+    },
+    "Defensive Anchor II": {
+      "count": 51,
+      "pct": 20.0
+    },
+    "Pacey Dribbler II": {
+      "count": 16,
+      "pct": 6.3
+    },
+    "Target Striker": {
+      "count": 29,
+      "pct": 11.4
+    }
+  },
+  "Paraguay": {
+    "Pacey Dribbler": {
+      "count": 21,
+      "pct": 16.2
+    },
+    "Defensive Anchor": {
+      "count": 34,
+      "pct": 26.2
+    },
+    "Deep Playmaker": {
+      "count": 15,
+      "pct": 11.5
+    },
+    "Defensive Anchor II": {
+      "count": 26,
+      "pct": 20.0
+    },
+    "Pacey Dribbler II": {
+      "count": 11,
+      "pct": 8.5
+    },
+    "Target Striker": {
+      "count": 23,
+      "pct": 17.7
+    }
+  },
+  "Australia": {
+    "Pacey Dribbler": {
+      "count": 22,
+      "pct": 12.6
+    },
+    "Defensive Anchor": {
+      "count": 61,
+      "pct": 35.1
+    },
+    "Deep Playmaker": {
+      "count": 21,
+      "pct": 12.1
+    },
+    "Defensive Anchor II": {
+      "count": 31,
+      "pct": 17.8
+    },
+    "Pacey Dribbler II": {
+      "count": 11,
+      "pct": 6.3
+    },
+    "Target Striker": {
+      "count": 28,
+      "pct": 16.1
+    }
+  },
+  "T\u00fcrkiye": {
+    "Pacey Dribbler": {
+      "count": 26,
+      "pct": 13.7
+    },
+    "Defensive Anchor": {
+      "count": 45,
+      "pct": 23.7
+    },
+    "Deep Playmaker": {
+      "count": 44,
+      "pct": 23.2
+    },
+    "Defensive Anchor II": {
+      "count": 28,
+      "pct": 14.7
+    },
+    "Pacey Dribbler II": {
+      "count": 30,
+      "pct": 15.8
+    },
+    "Target Striker": {
+      "count": 17,
+      "pct": 8.9
+    }
+  },
+  "France": {
+    "Pacey Dribbler": {
+      "count": 124,
+      "pct": 16.6
+    },
+    "Defensive Anchor": {
+      "count": 188,
+      "pct": 25.2
+    },
+    "Deep Playmaker": {
+      "count": 175,
+      "pct": 23.5
+    },
+    "Defensive Anchor II": {
+      "count": 126,
+      "pct": 16.9
+    },
+    "Pacey Dribbler II": {
+      "count": 80,
+      "pct": 10.7
+    },
+    "Target Striker": {
+      "count": 53,
+      "pct": 7.1
+    }
+  },
+  "Senegal": {
+    "Pacey Dribbler": {
+      "count": 18,
+      "pct": 15.3
+    },
+    "Defensive Anchor": {
+      "count": 23,
+      "pct": 19.5
+    },
+    "Deep Playmaker": {
+      "count": 17,
+      "pct": 14.4
+    },
+    "Defensive Anchor II": {
+      "count": 21,
+      "pct": 17.8
+    },
+    "Pacey Dribbler II": {
+      "count": 18,
+      "pct": 15.3
+    },
+    "Target Striker": {
+      "count": 21,
+      "pct": 17.8
+    }
+  },
+  "Iraq": {
+    "Pacey Dribbler": {
+      "count": 3,
+      "pct": 21.4
+    },
+    "Defensive Anchor": {
+      "count": 5,
+      "pct": 35.7
+    },
+    "Deep Playmaker": {
+      "count": 3,
+      "pct": 21.4
+    },
+    "Defensive Anchor II": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Pacey Dribbler II": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Target Striker": {
+      "count": 3,
+      "pct": 21.4
+    }
+  },
+  "Norway": {
+    "Pacey Dribbler": {
+      "count": 45,
+      "pct": 14.3
+    },
+    "Defensive Anchor": {
+      "count": 98,
+      "pct": 31.1
+    },
+    "Deep Playmaker": {
+      "count": 56,
+      "pct": 17.8
+    },
+    "Defensive Anchor II": {
+      "count": 48,
+      "pct": 15.2
+    },
+    "Pacey Dribbler II": {
+      "count": 27,
+      "pct": 8.6
+    },
+    "Target Striker": {
+      "count": 41,
+      "pct": 13.0
+    }
+  },
+  "Germany": {
+    "Pacey Dribbler": {
+      "count": 136,
+      "pct": 15.6
+    },
+    "Defensive Anchor": {
+      "count": 238,
+      "pct": 27.3
+    },
+    "Deep Playmaker": {
+      "count": 139,
+      "pct": 16.0
+    },
+    "Defensive Anchor II": {
+      "count": 154,
+      "pct": 17.7
+    },
+    "Pacey Dribbler II": {
+      "count": 81,
+      "pct": 9.3
+    },
+    "Target Striker": {
+      "count": 123,
+      "pct": 14.1
+    }
+  },
+  "Ecuador": {
+    "Pacey Dribbler": {
+      "count": 21,
+      "pct": 20.0
+    },
+    "Defensive Anchor": {
+      "count": 32,
+      "pct": 30.5
+    },
+    "Deep Playmaker": {
+      "count": 14,
+      "pct": 13.3
+    },
+    "Defensive Anchor II": {
+      "count": 12,
+      "pct": 11.4
+    },
+    "Pacey Dribbler II": {
+      "count": 15,
+      "pct": 14.3
+    },
+    "Target Striker": {
+      "count": 11,
+      "pct": 10.5
+    }
+  },
+  "C\u00f4te d'Ivoire": {
+    "Pacey Dribbler": {
+      "count": 21,
+      "pct": 17.2
+    },
+    "Defensive Anchor": {
+      "count": 29,
+      "pct": 23.8
+    },
+    "Deep Playmaker": {
+      "count": 20,
+      "pct": 16.4
+    },
+    "Defensive Anchor II": {
+      "count": 18,
+      "pct": 14.8
+    },
+    "Pacey Dribbler II": {
+      "count": 19,
+      "pct": 15.6
+    },
+    "Target Striker": {
+      "count": 15,
+      "pct": 12.3
+    }
+  },
+  "Curacao": {
+    "Pacey Dribbler": {
+      "count": 3,
+      "pct": 25.0
+    },
+    "Defensive Anchor": {
+      "count": 6,
+      "pct": 50.0
+    },
+    "Deep Playmaker": {
+      "count": 1,
+      "pct": 8.3
+    },
+    "Defensive Anchor II": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Pacey Dribbler II": {
+      "count": 2,
+      "pct": 16.7
+    },
+    "Target Striker": {
+      "count": 0,
+      "pct": 0.0
+    }
+  },
+  "Japan": {
+    "Pacey Dribbler": {
+      "count": 16,
+      "pct": 17.6
+    },
+    "Defensive Anchor": {
+      "count": 22,
+      "pct": 24.2
+    },
+    "Deep Playmaker": {
+      "count": 22,
+      "pct": 24.2
+    },
+    "Defensive Anchor II": {
+      "count": 6,
+      "pct": 6.6
+    },
+    "Pacey Dribbler II": {
+      "count": 17,
+      "pct": 18.7
+    },
+    "Target Striker": {
+      "count": 8,
+      "pct": 8.8
+    }
+  },
+  "Sweden": {
+    "Pacey Dribbler": {
+      "count": 46,
+      "pct": 15.3
+    },
+    "Defensive Anchor": {
+      "count": 85,
+      "pct": 28.2
+    },
+    "Deep Playmaker": {
+      "count": 51,
+      "pct": 16.9
+    },
+    "Defensive Anchor II": {
+      "count": 57,
+      "pct": 18.9
+    },
+    "Pacey Dribbler II": {
+      "count": 29,
+      "pct": 9.6
+    },
+    "Target Striker": {
+      "count": 33,
+      "pct": 11.0
+    }
+  },
+  "Netherlands": {
+    "Pacey Dribbler": {
+      "count": 53,
+      "pct": 15.1
+    },
+    "Defensive Anchor": {
+      "count": 72,
+      "pct": 20.5
+    },
+    "Deep Playmaker": {
+      "count": 108,
+      "pct": 30.7
+    },
+    "Defensive Anchor II": {
+      "count": 50,
+      "pct": 14.2
+    },
+    "Pacey Dribbler II": {
+      "count": 35,
+      "pct": 9.9
+    },
+    "Target Striker": {
+      "count": 34,
+      "pct": 9.7
+    }
+  },
+  "Tunisia": {
+    "Pacey Dribbler": {
+      "count": 3,
+      "pct": 10.7
+    },
+    "Defensive Anchor": {
+      "count": 7,
+      "pct": 25.0
+    },
+    "Deep Playmaker": {
+      "count": 10,
+      "pct": 35.7
+    },
+    "Defensive Anchor II": {
+      "count": 2,
+      "pct": 7.1
+    },
+    "Pacey Dribbler II": {
+      "count": 5,
+      "pct": 17.9
+    },
+    "Target Striker": {
+      "count": 1,
+      "pct": 3.6
+    }
+  },
+  "Argentina": {
+    "Pacey Dribbler": {
+      "count": 143,
+      "pct": 16.1
+    },
+    "Defensive Anchor": {
+      "count": 223,
+      "pct": 25.1
+    },
+    "Deep Playmaker": {
+      "count": 169,
+      "pct": 19.0
+    },
+    "Defensive Anchor II": {
+      "count": 143,
+      "pct": 16.1
+    },
+    "Pacey Dribbler II": {
+      "count": 118,
+      "pct": 13.3
+    },
+    "Target Striker": {
+      "count": 94,
+      "pct": 10.6
+    }
+  },
+  "England": {
+    "Pacey Dribbler": {
+      "count": 134,
+      "pct": 12.9
+    },
+    "Defensive Anchor": {
+      "count": 343,
+      "pct": 33.0
+    },
+    "Deep Playmaker": {
+      "count": 186,
+      "pct": 17.9
+    },
+    "Defensive Anchor II": {
+      "count": 177,
+      "pct": 17.0
+    },
+    "Pacey Dribbler II": {
+      "count": 83,
+      "pct": 8.0
+    },
+    "Target Striker": {
+      "count": 117,
+      "pct": 11.2
+    }
+  },
+  "Portugal": {
+    "Pacey Dribbler": {
+      "count": 48,
+      "pct": 16.2
+    },
+    "Defensive Anchor": {
+      "count": 68,
+      "pct": 22.9
+    },
+    "Deep Playmaker": {
+      "count": 78,
+      "pct": 26.3
+    },
+    "Defensive Anchor II": {
+      "count": 36,
+      "pct": 12.1
+    },
+    "Pacey Dribbler II": {
+      "count": 49,
+      "pct": 16.5
+    },
+    "Target Striker": {
+      "count": 18,
+      "pct": 6.1
+    }
+  },
+  "Spain": {
+    "Pacey Dribbler": {
+      "count": 157,
+      "pct": 17.5
+    },
+    "Defensive Anchor": {
+      "count": 200,
+      "pct": 22.3
+    },
+    "Deep Playmaker": {
+      "count": 219,
+      "pct": 24.4
+    },
+    "Defensive Anchor II": {
+      "count": 117,
+      "pct": 13.1
+    },
+    "Pacey Dribbler II": {
+      "count": 137,
+      "pct": 15.3
+    },
+    "Target Striker": {
+      "count": 66,
+      "pct": 7.4
+    }
+  },
+  "Belgium": {
+    "Pacey Dribbler": {
+      "count": 36,
+      "pct": 15.6
+    },
+    "Defensive Anchor": {
+      "count": 53,
+      "pct": 22.9
+    },
+    "Deep Playmaker": {
+      "count": 60,
+      "pct": 26.0
+    },
+    "Defensive Anchor II": {
+      "count": 37,
+      "pct": 16.0
+    },
+    "Pacey Dribbler II": {
+      "count": 34,
+      "pct": 14.7
+    },
+    "Target Striker": {
+      "count": 11,
+      "pct": 4.8
+    }
+  },
+  "Croatia": {
+    "Pacey Dribbler": {
+      "count": 18,
+      "pct": 12.4
+    },
+    "Defensive Anchor": {
+      "count": 30,
+      "pct": 20.7
+    },
+    "Deep Playmaker": {
+      "count": 29,
+      "pct": 20.0
+    },
+    "Defensive Anchor II": {
+      "count": 34,
+      "pct": 23.4
+    },
+    "Pacey Dribbler II": {
+      "count": 18,
+      "pct": 12.4
+    },
+    "Target Striker": {
+      "count": 16,
+      "pct": 11.0
+    }
+  },
+  "Uruguay": {
+    "Pacey Dribbler": {
+      "count": 39,
+      "pct": 17.6
+    },
+    "Defensive Anchor": {
+      "count": 53,
+      "pct": 23.9
+    },
+    "Deep Playmaker": {
+      "count": 37,
+      "pct": 16.7
+    },
+    "Defensive Anchor II": {
+      "count": 38,
+      "pct": 17.1
+    },
+    "Pacey Dribbler II": {
+      "count": 23,
+      "pct": 10.4
+    },
+    "Target Striker": {
+      "count": 32,
+      "pct": 14.4
+    }
+  },
+  "Colombia": {
+    "Pacey Dribbler": {
+      "count": 42,
+      "pct": 22.5
+    },
+    "Defensive Anchor": {
+      "count": 40,
+      "pct": 21.4
+    },
+    "Deep Playmaker": {
+      "count": 26,
+      "pct": 13.9
+    },
+    "Defensive Anchor II": {
+      "count": 38,
+      "pct": 20.3
+    },
+    "Pacey Dribbler II": {
+      "count": 34,
+      "pct": 18.2
+    },
+    "Target Striker": {
+      "count": 7,
+      "pct": 3.7
+    }
+  },
+  "Iran": {
+    "Pacey Dribbler": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Defensive Anchor": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Deep Playmaker": {
+      "count": 1,
+      "pct": 20.0
+    },
+    "Defensive Anchor II": {
+      "count": 1,
+      "pct": 20.0
+    },
+    "Pacey Dribbler II": {
+      "count": 3,
+      "pct": 60.0
+    },
+    "Target Striker": {
+      "count": 0,
+      "pct": 0.0
+    }
+  },
+  "Jordan": {
+    "Pacey Dribbler": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Defensive Anchor": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Deep Playmaker": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Defensive Anchor II": {
+      "count": 1,
+      "pct": 33.3
+    },
+    "Pacey Dribbler II": {
+      "count": 1,
+      "pct": 33.3
+    },
+    "Target Striker": {
+      "count": 1,
+      "pct": 33.3
+    }
+  },
+  "Saudi Arabia": {
+    "Pacey Dribbler": {
+      "count": 28,
+      "pct": 21.2
+    },
+    "Defensive Anchor": {
+      "count": 51,
+      "pct": 38.6
+    },
+    "Deep Playmaker": {
+      "count": 10,
+      "pct": 7.6
+    },
+    "Defensive Anchor II": {
+      "count": 30,
+      "pct": 22.7
+    },
+    "Pacey Dribbler II": {
+      "count": 4,
+      "pct": 3.0
+    },
+    "Target Striker": {
+      "count": 9,
+      "pct": 6.8
+    }
+  },
+  "Uzbekistan": {
+    "Pacey Dribbler": {
+      "count": 2,
+      "pct": 40.0
+    },
+    "Defensive Anchor": {
+      "count": 1,
+      "pct": 20.0
+    },
+    "Deep Playmaker": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Defensive Anchor II": {
+      "count": 1,
+      "pct": 20.0
+    },
+    "Pacey Dribbler II": {
+      "count": 1,
+      "pct": 20.0
+    },
+    "Target Striker": {
+      "count": 0,
+      "pct": 0.0
+    }
+  },
+  "Algeria": {
+    "Pacey Dribbler": {
+      "count": 8,
+      "pct": 13.8
+    },
+    "Defensive Anchor": {
+      "count": 8,
+      "pct": 13.8
+    },
+    "Deep Playmaker": {
+      "count": 19,
+      "pct": 32.8
+    },
+    "Defensive Anchor II": {
+      "count": 2,
+      "pct": 3.4
+    },
+    "Pacey Dribbler II": {
+      "count": 16,
+      "pct": 27.6
+    },
+    "Target Striker": {
+      "count": 5,
+      "pct": 8.6
+    }
+  },
+  "Cabo Verde": {
+    "Pacey Dribbler": {
+      "count": 3,
+      "pct": 11.5
+    },
+    "Defensive Anchor": {
+      "count": 9,
+      "pct": 34.6
+    },
+    "Deep Playmaker": {
+      "count": 3,
+      "pct": 11.5
+    },
+    "Defensive Anchor II": {
+      "count": 3,
+      "pct": 11.5
+    },
+    "Pacey Dribbler II": {
+      "count": 6,
+      "pct": 23.1
+    },
+    "Target Striker": {
+      "count": 2,
+      "pct": 7.7
+    }
+  },
+  "Egypt": {
+    "Pacey Dribbler": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Defensive Anchor": {
+      "count": 1,
+      "pct": 12.5
+    },
+    "Deep Playmaker": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "Defensive Anchor II": {
+      "count": 3,
+      "pct": 37.5
+    },
+    "Pacey Dribbler II": {
+      "count": 2,
+      "pct": 25.0
+    },
+    "Target Striker": {
+      "count": 2,
+      "pct": 25.0
+    }
+  },
+  "Ghana": {
+    "Pacey Dribbler": {
+      "count": 26,
+      "pct": 22.2
+    },
+    "Defensive Anchor": {
+      "count": 20,
+      "pct": 17.1
+    },
+    "Deep Playmaker": {
+      "count": 18,
+      "pct": 15.4
+    },
+    "Defensive Anchor II": {
+      "count": 19,
+      "pct": 16.2
+    },
+    "Pacey Dribbler II": {
+      "count": 22,
+      "pct": 18.8
+    },
+    "Target Striker": {
+      "count": 12,
+      "pct": 10.3
+    }
+  },
+  "Congo DR": {
+    "Pacey Dribbler": {
+      "count": 5,
+      "pct": 12.2
+    },
+    "Defensive Anchor": {
+      "count": 6,
+      "pct": 14.6
+    },
+    "Deep Playmaker": {
+      "count": 12,
+      "pct": 29.3
+    },
+    "Defensive Anchor II": {
+      "count": 5,
+      "pct": 12.2
+    },
+    "Pacey Dribbler II": {
+      "count": 8,
+      "pct": 19.5
+    },
+    "Target Striker": {
+      "count": 5,
+      "pct": 12.2
+    }
+  },
+  "New Zealand": {
+    "Pacey Dribbler": {
+      "count": 3,
+      "pct": 10.0
+    },
+    "Defensive Anchor": {
+      "count": 9,
+      "pct": 30.0
+    },
+    "Deep Playmaker": {
+      "count": 7,
+      "pct": 23.3
+    },
+    "Defensive Anchor II": {
+      "count": 6,
+      "pct": 20.0
+    },
+    "Pacey Dribbler II": {
+      "count": 2,
+      "pct": 6.7
+    },
+    "Target Striker": {
+      "count": 3,
+      "pct": 10.0
+    }
+  },
+  "Austria": {
+    "Pacey Dribbler": {
+      "count": 22,
+      "pct": 11.8
+    },
+    "Defensive Anchor": {
+      "count": 44,
+      "pct": 23.7
+    },
+    "Deep Playmaker": {
+      "count": 34,
+      "pct": 18.3
+    },
+    "Defensive Anchor II": {
+      "count": 43,
+      "pct": 23.1
+    },
+    "Pacey Dribbler II": {
+      "count": 20,
+      "pct": 10.8
+    },
+    "Target Striker": {
+      "count": 23,
+      "pct": 12.4
+    }
+  },
+  "Panama": {
+    "Pacey Dribbler": {
+      "count": 1,
+      "pct": 9.1
+    },
+    "Defensive Anchor": {
+      "count": 4,
+      "pct": 36.4
+    },
+    "Deep Playmaker": {
+      "count": 2,
+      "pct": 18.2
+    },
+    "Defensive Anchor II": {
+      "count": 2,
+      "pct": 18.2
+    },
+    "Pacey Dribbler II": {
+      "count": 1,
+      "pct": 9.1
+    },
+    "Target Striker": {
+      "count": 1,
+      "pct": 9.1
+    }
+  }
+}
