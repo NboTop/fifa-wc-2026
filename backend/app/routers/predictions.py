@@ -14,11 +14,12 @@ class PredictRequest(BaseModel):
 
 @router.post("/predict")
 def predict_match(payload: PredictRequest):
+    if len(payload.team_a.strip()) < 3 or len(payload.team_b.strip()) < 3:
+        raise HTTPException(status_code=422, detail="Team name too short — enter a full country name")
     try:
         return match_predictor.predict(payload.team_a, payload.team_b, payload.as_of)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
 
 @router.get("/predictions")
 def get_all_predictions():

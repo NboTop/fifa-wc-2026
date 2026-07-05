@@ -5,24 +5,6 @@ from typing import Dict, Any
 
 MODELS = Path(__file__).parent.parent.parent / "models"
 
-FIFA_RANKINGS = {
-    'Argentina': 1, 'France': 2, 'England': 3, 'Brazil': 4,
-    'Belgium': 5, 'Portugal': 6, 'Netherlands': 7, 'Spain': 8,
-    'Germany': 9, 'Croatia': 10, 'Italy': 11, 'Morocco': 12,
-    'United States': 13, 'Mexico': 14, 'Switzerland': 15, 'Uruguay': 16,
-    'Colombia': 17, 'Senegal': 18, 'Denmark': 19, 'Japan': 20,
-    'Ecuador': 21, 'Australia': 22, 'Korea Republic': 23,
-    'Canada': 24, 'Poland': 26, 'Tunisia': 27, 'Sweden': 30,
-    'Norway': 31, 'Türkiye': 32, 'Turkey': 32, 'Austria': 33,
-    'Egypt': 34, 'Ghana': 35, "Côte d'Ivoire": 36, 'Algeria': 37,
-    'Bosnia and Herzegovina': 38, 'Qatar': 39, 'Saudi Arabia': 40,
-    'Iraq': 41, 'Iran': 42, 'Scotland': 43, 'Czechia': 44,
-    'Paraguay': 45, 'South Africa': 47, 'Panama': 48,
-    'New Zealand': 51, 'Jordan': 52, 'Uzbekistan': 53,
-    'Haiti': 54, 'Curacao': 55, 'Congo DR': 58, 'Cabo Verde': 60,
-}
-
-
 class MatchPredictor:
     def __init__(self):
         self.rf      = None
@@ -38,12 +20,10 @@ class MatchPredictor:
         self.rf      = joblib.load(MODELS / "rf_model.pkl")
         self.xgb     = joblib.load(MODELS / "xgb_model.pkl")
         self.le      = joblib.load(MODELS / "label_encoder.pkl")
+        self.elo = joblib.load(MODELS / "elo_ratings.pkl")
         self.history = joblib.load(MODELS / "match_history.pkl")
         self.history["date"] = pd.to_datetime(self.history["date"])
         print("✓ Engine 1: Match Predictor ready")
-
-    def _ranking(self, team: str) -> int:
-        return FIFA_RANKINGS.get(team, 60)
 
     def _form(self, team: str, before: str, n: int = 10) -> Dict:
         df = self.history
@@ -99,57 +79,79 @@ class MatchPredictor:
         t = len(h2h)
         return {"a_wins": a_w / t, "draws": draws / t, "b_wins": b_w / t}
 
-    def predict(self, team_a: str, team_b: str, as_of: str = "2026-06-21") -> Dict[str, Any]:
+    def predict(self, team_a: str, team_b: str, as_of: str = "2026-07-01") -> Dict[str, Any]:
         if not self.is_loaded:
             raise RuntimeError("Model not loaded")
 
-        fa  = self._form(team_a, as_of)
-        fb  = self._form(team_b, as_of)
-        h2h = self._h2h(team_a, team_b, as_of)
-        ar  = self._ranking(team_a)
-        br  = self._ranking(team_b)
+        # Run prediction both ways and average — removes home team bias
+        # since WC matches are on neutral ground
+        def _single(a, b):
+            fa  = self._form(a, as_of)
+            fb  = self._form(b, as_of)
+            h2h = self._h2h(a, b, as_of)
+            a_elo = self.elo.get(a, 1500)
+            b_elo = self.elo.get(b, 1500)
 
-        feat = pd.DataFrame([{
-            "a_win_rate":       fa["win_rate"],
-            "a_goals_scored":   fa["goals_scored"],
-            "a_goals_conceded": fa["goals_conceded"],
-            "a_form_trend":     fa["form_trend"],
-            "a_scorer_depth":   0.5,
-            "a_ranking":        ar,
-            "b_win_rate":       fb["win_rate"],
-            "b_goals_scored":   fb["goals_scored"],
-            "b_goals_conceded": fb["goals_conceded"],
-            "b_form_trend":     fb["form_trend"],
-            "b_scorer_depth":   0.5,
-            "b_ranking":        br,
-            "win_rate_diff":    fa["win_rate"]     - fb["win_rate"],
-            "goals_diff":       fa["goals_scored"] - fb["goals_scored"],
-            "ranking_diff":     br - ar,
-            "h2h_a_wins":       h2h["a_wins"],
-            "h2h_draws":        h2h["draws"],
-            "h2h_b_wins":       h2h["b_wins"],
-            "is_tournament":    1,
-        }])
+            feat = pd.DataFrame([{
+                'a_win_rate':       fa['win_rate'],
+                'a_goals_scored':   fa['goals_scored'],
+                'a_goals_conceded': fa['goals_conceded'],
+                'a_form_trend':     fa['form_trend'],
+                'a_scorer_depth':   0.5,
+                'a_elo':            a_elo,
+                'b_win_rate':       fb['win_rate'],
+                'b_goals_scored':   fb['goals_scored'],
+                'b_goals_conceded': fb['goals_conceded'],
+                'b_form_trend':     fb['form_trend'],
+                'b_scorer_depth':   0.5,
+                'b_elo':            b_elo,
+                'win_rate_diff':    fa['win_rate']     - fb['win_rate'],
+                'goals_diff':       fa['goals_scored'] - fb['goals_scored'],
+                'elo_diff':         a_elo - b_elo,
+                'h2h_a_wins':       h2h['a_wins'],
+                'h2h_draws':        h2h['draws'],
+                'h2h_b_wins':       h2h['b_wins'],
+                'is_tournament':    1,
+            }])
 
-        avg   = (self.rf.predict_proba(feat)[0] + self.xgb.predict_proba(feat)[0]) / 2
-        probs = dict(zip(self.le.classes_, avg))
+            rf_p  = self.rf.predict_proba(feat)[0]
+            xgb_p = self.xgb.predict_proba(feat)[0]
+            return (rf_p + xgb_p) / 2
 
-        a_pct    = round(float(probs.get("a_win", 0)) * 100, 1)
-        draw_pct = round(float(probs.get("draw",  0)) * 100, 1)
-        b_pct    = round(float(probs.get("b_win", 0)) * 100, 1)
+        # Forward: A vs B
+        fwd = _single(team_a, team_b)
+        # Reverse: B vs A — then flip a_win/b_win
+        rev = _single(team_b, team_a)
+
+        classes = self.le.classes_  # ['a_win', 'b_win', 'draw']
+        idx_a   = list(classes).index('a_win')
+        idx_b   = list(classes).index('b_win')
+        idx_d   = list(classes).index('draw')
+
+        # Reverse prediction: a_win in reversed = b_win in forward
+        rev_flipped = [0.0] * 3
+        rev_flipped[idx_a] = rev[idx_b]
+        rev_flipped[idx_b] = rev[idx_a]
+        rev_flipped[idx_d] = rev[idx_d]
+
+        avg = [(fwd[i] + rev_flipped[i]) / 2 for i in range(3)]
+
+        a_pct    = round(float(avg[idx_a]) * 100, 1)
+        draw_pct = round(float(avg[idx_d]) * 100, 1)
+        b_pct    = round(float(avg[idx_b]) * 100, 1)
 
         if a_pct >= b_pct and a_pct >= draw_pct:
             predicted, conf = team_a, a_pct
         elif b_pct >= a_pct and b_pct >= draw_pct:
             predicted, conf = team_b, b_pct
         else:
-            predicted, conf = "Draw", draw_pct
+            predicted, conf = 'Draw', draw_pct
 
         return {
-            "team_a":     team_a, "team_b": team_b,
-            "team_a_win": a_pct,  "draw":   draw_pct, "team_b_win": b_pct,
-            "predicted":  predicted, "confidence": conf,
-            "draw_risk":  draw_pct >= 28,
+            'team_a':     team_a, 'team_b': team_b,
+            'team_a_win': a_pct,  'draw':   draw_pct, 'team_b_win': b_pct,
+            'predicted':  predicted, 'confidence': conf,
+            'draw_risk':  draw_pct >= 28,
         }
 
     def get_all_predictions(self) -> list:

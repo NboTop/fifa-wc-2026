@@ -8,6 +8,10 @@
       <div class="nav-links">
         <RouterLink to="/">Dashboard</RouterLink>
         <RouterLink to="/players">Players</RouterLink>
+        <RouterLink to="/sentiment">
+          Sentiment
+          <span class="nav-live-dot" />
+        </RouterLink>
       </div>
     </nav>
     <main><RouterView /></main>
@@ -29,6 +33,7 @@
   --green:    #0acf83;
   --coral:    #ff7262;
   --blue:     #1abcfe;
+  --neu:      #f5a623;
   --text:     #e8e8f0;
   --muted:    #6b6b88;
   --font:     'Inter', system-ui, sans-serif;
@@ -46,7 +51,6 @@ body {
 
 #app { display: flex; flex-direction: column; min-height: 100vh; }
 
-/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -62,27 +66,20 @@ body {
 }
 
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 800;
-  color: var(--gold-l);
-  letter-spacing: -0.02em;
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; font-size: 1rem;
+  font-weight: 800; color: var(--gold-l); letter-spacing: -0.02em;
 }
 
 .trophy { font-size: 1.2rem; }
 
-.nav-links { display: flex; gap: 4px; }
+.nav-links { display: flex; gap: 4px; align-items: center; }
 
 .nav-links a {
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 500;
-  padding: 6px 14px;
-  border-radius: 99px;
+  color: var(--muted); text-decoration: none;
+  font-size: 0.85rem; font-weight: 500;
+  padding: 6px 14px; border-radius: 99px;
+  display: flex; align-items: center; gap: 6px;
   transition: background 0.15s, color 0.15s;
 }
 
@@ -90,6 +87,19 @@ body {
 .nav-links a.router-link-active {
   background: var(--gold-dim);
   color: var(--gold-l);
+}
+
+/* Live dot on Sentiment nav item */
+.nav-live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #ff4444;
+  animation: pulse-dot 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.7); }
 }
 
 main {
@@ -113,7 +123,6 @@ main {
   font-weight: 900;
   letter-spacing: -0.04em;
   color: var(--gold-l);
-  margin-bottom: 2rem;
 }
 
 .eyebrow {
@@ -123,19 +132,18 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--muted);
-  margin-bottom: 0.5rem;
 }
 
 .spinner {
   width: 14px; height: 14px;
   border: 2px solid rgba(255,255,255,0.2);
-  border-top-color: var(--gold);
+  border-top-color: currentColor;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
   display: inline-block;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
 
+@keyframes spin { to { transform: rotate(360deg); } }
 @keyframes rise {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }

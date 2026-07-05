@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 
 BASE   = "http://localhost:8000"
-AS_OF  = "2026-06-22"
+AS_OF  = "2026-07-01"
 MODELS = Path("models")
 
 # All remaining group stage matches across all 12 groups
@@ -58,6 +58,23 @@ MATCHES = [
     # Group L — Round 3 (June 27)
     ("Panama",              "England",                "Group L", "June 27"),
     ("Croatia",             "Ghana",                  "Group L", "June 27"),
+    # ── Round of 32 ──────────────────────────────────────────────────
+    ("Brazil",         "Japan",               "Round of 32", "Jun-29"),
+    ("Germany",        "Paraguay",            "Round of 32", "Jun-29"),
+    ("Morocco",        "Netherlands",         "Round of 32", "Jun-29"),
+    ("Norway",         "Cote d'Ivoire",       "Round of 32", "Jun-30"),
+    ("France",         "Sweden",              "Round of 32", "Jun-30"),
+    ("Mexico",         "Ecuador",             "Round of 32", "Jun-30"),
+    ("England",        "Congo DR",            "Round of 32", "Jul-1"),
+    ("Belgium",        "Senegal",             "Round of 32", "Jul-1"),
+    ("United States",  "Bosnia and Herzegovina", "Round of 32", "Jul-1"),
+    ("Spain",          "Austria",             "Round of 32", "Jul-2"),
+    ("Portugal",       "Croatia",             "Round of 32", "Jul-2"),
+    ("Switzerland",    "Algeria",             "Round of 32", "Jul-2"),
+    ("Australia",      "Egypt",               "Round of 32", "Jul-3"),
+    ("Argentina",      "Cabo Verde",          "Round of 32", "Jul-3"),
+    ("Colombia",       "Ghana",               "Round of 32", "Jul-3"),
+    ("Canada",         "Morocco",             "Round of 32", "Jul-4"),
 ]
 
 print("Generating predictions for all 12 groups...\n")
