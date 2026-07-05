@@ -1,40 +1,64 @@
 team_a,team_b,team_a_win_pct,draw_pct,team_b_win_pct,predicted,confidence,actual_result,correct,date,stage
-Mexico,Czechia,73.6,19.4,7,Mexico,73.6,,,TBD,Group
-South Africa,Korea Republic,26.2,21.2,52.5,Korea Republic,52.5,,,TBD,Group
-Switzerland,Canada,36,37.7,26.3,Draw,37.7,,,TBD,Group
-Bosnia and Herzegovina,Qatar,47.6,36.2,16.2,Bosnia and Herzegovina,47.6,,,TBD,Group
-Brazil,Scotland,65.2,15,19.8,Brazil,65.2,,,TBD,Group
-Morocco,Haiti,75.7,10.4,13.9,Morocco,75.7,,,TBD,Group
-Paraguay,Australia,35.4,16.3,48.3,Australia,48.3,,,TBD,Group
-France,Iraq,68.3,25,6.7,France,68.3,France,TRUE,TBD,Group
-Senegal,Norway,55.8,19.1,25.1,Senegal,55.8,Norway,FALSE,TBD,Group
-France,Norway,59.8,26.7,13.6,France,59.8,,,TBD,Group
-Iraq,Senegal,19.5,23,57.4,Senegal,57.4,,,TBD,Group
-Germany,Cote d'Ivoire,77.3,15.5,7.1,Germany,77.3,Germany,TRUE,TBD,Group
-Ecuador,Curacao,71.8,15,13.2,Ecuador,71.8,Draw,FALSE,TBD,Group
-Germany,Ecuador,74.6,16.5,8.9,Germany,74.6,,,TBD,Group
-Cote d'Ivoire,Curacao,60.3,17.6,22.1,Cote d'Ivoire,60.3,,,TBD,Group
-Sweden,Netherlands,13.2,37.4,49.4,Netherlands,49.4,Netherlands,TRUE,TBD,Group
-Japan,Tunisia,70.7,19.2,10.1,Japan,70.7,Japan,TRUE,TBD,Group
-Japan,Sweden,57.9,25.9,16.1,Japan,57.9,,,TBD,Group
-Netherlands,Tunisia,62.4,29.4,8.2,Netherlands,62.4,,,TBD,Group
-United States,Turkey,53.6,20.4,26,United States,53.6,,,Jun-25,Group D
-Belgium,Iran,63.7,18.4,17.9,Belgium,63.7,Draw,FALSE,Jun-22,Group G
-New Zealand,Egypt,29.9,14.9,55.2,Egypt,55.2,Egypt,TRUE,Jun-22,Group G
-Belgium,New Zealand,74.8,9.7,15.5,Belgium,74.8,,,Jun-26,Group G
-Egypt,Iran,62.9,18.4,18.8,Egypt,62.9,,,Jun-26,Group G
-Uruguay,Cabo Verde,52.5,12,35.5,Uruguay,52.5,Draw,FALSE,Jun-21,Group H
-Spain,Uruguay,62.8,15.2,22,Spain,62.8,,,Jun-25,Group H
-Cabo Verde,Saudi Arabia,46.7,19.3,34,Cabo Verde,46.7,,,Jun-25,Group H
-Argentina,Austria,54.9,36,9.1,Argentina,54.9,Argentina,TRUE,Jun-22,Group J
-Algeria,Jordan,67.2,23.8,9,Algeria,67.2,Algeria,TRUE,Jun-22,Group J
-Argentina,Jordan,81,14.1,4.9,Argentina,81,,,Jun-27,Group J
-Algeria,Austria,34.7,28,37.3,Austria,37.3,,,Jun-27,Group J
-Portugal,Uzbekistan,82.6,11.8,5.6,Portugal,82.6,Portugal,TRUE,Jun-23,Group K
-Colombia,Congo DR,74.4,19.1,6.6,Colombia,74.4,Colombia,TRUE,Jun-23,Group K
-Colombia,Portugal,26.1,23.4,50.5,Portugal,50.5,,,Jun-27,Group K
-Congo DR,Uzbekistan,54,21.3,24.6,Congo DR,54,,,Jun-27,Group K
-England,Ghana,64.8,28.8,6.4,England,64.8,Draw,FALSE,Jun-23,Group L
-Panama,Croatia,13.2,21.5,65.2,Croatia,65.2,Croatia,TRUE,Jun-23,Group L
-Panama,England,7.5,19.8,72.7,England,72.7,,,Jun-27,Group L
-Croatia,Ghana,70.3,20.2,9.4,Croatia,70.3,,,Jun-27,Group L
+Mexico,Czechia,85.7,9.6,4.7,Mexico,85.7,Mexico,True,Jun-24,Group A
+South Africa,Korea Republic,56.4,25.0,18.5,South Africa,56.4,South Africa,True,Jun-24,Group A
+Switzerland,Canada,39.8,40.3,19.9,Draw,40.3,Switzerland,False,Jun-24,Group B
+Bosnia and Herzegovina,Qatar,62.8,23.4,13.8,Bosnia and Herzegovina,62.8,Bosnia and Herzegovina,True,Jun-24,Group B
+Brazil,Scotland,52.2,40.2,7.6,Brazil,52.2,Brazil,True,Jun-24,Group C
+Morocco,Haiti,76.4,18.4,5.2,Morocco,76.4,Morocco,True,Jun-24,Group C
+USA,Turkey,15.7,22.2,62.1,Turkey,62.1,Turkey,True,Jun-25,Group D
+Paraguay,Australia,41.1,32.2,26.7,Paraguay,41.1,Draw,False,Jun-25,Group D
+France,Iraq,76.2,16.4,7.4,France,76.2,France,True,Jun-22,Group E
+Senegal,Norway,22.3,41.3,36.4,Draw,41.3,Norway,False,Jun-22,Group E
+France,Norway,54.2,33.7,12.1,France,54.2,Norway,False,Jun-26,Group E
+Iraq,Senegal,18.3,21.2,60.5,Senegal,60.5,Senegal,True,Jun-26,Group E
+Germany,Cote d'Ivoire,85.5,9.8,4.7,Germany,85.5,Germany,True,Jun-20,Group G
+Ecuador,Curacao,80.5,10.8,8.7,Ecuador,80.5,Ecuador,True,Jun-20,Group G
+Germany,Ecuador,67.2,22.7,10.1,Germany,67.2,Ecuador,False,Jun-25,Group G
+Cote d'Ivoire,Curacao,38.5,29.9,31.5,Cote d'Ivoire,38.5,Cote d'Ivoire,True,Jun-25,Group G
+Sweden,Netherlands,18.3,20.4,61.3,Netherlands,61.3,Netherlands,True,Jun-20,Group F
+Japan,Tunisia,80.6,14.3,5.2,Japan,80.6,Japan,True,Jun-21,Group F
+Japan,Sweden,70.9,20.7,8.4,Japan,70.9,Draw,False,Jun-25,Group F
+Netherlands,Tunisia,70.7,21.8,7.5,Netherlands,70.7,Netherlands,True,Jun-25,Group F
+Belgium,Iran,63.7,22.1,14.2,Belgium,63.7,Draw,False,Jun-21,Group I
+New Zealand,Egypt,27.3,17.6,55.2,Egypt,55.2,Egypt,True,Jun-22,Group I
+Belgium,New Zealand,74.8,16.4,8.8,Belgium,74.8,Belgium,True,Jun-26,Group I
+Egypt,Iran,62.9,21.4,15.7,Egypt,62.9,Draw,False,Jun-26,Group I
+Uruguay,Cabo Verde,52.5,28.6,18.9,Uruguay,52.5,Draw,False,Jun-21,Group H
+Spain,Uruguay,62.8,23.4,13.8,Spain,62.8,Spain,True,Jun-26,Group H
+Cabo Verde,Saudi Arabia,46.7,31.2,22.1,Cabo Verde,46.7,Draw,False,Jun-26,Group H
+Argentina,Austria,54.9,26.3,18.8,Argentina,54.9,Argentina,True,Jun-22,Group J
+Algeria,Jordan,67.2,19.8,13.0,Algeria,67.2,Algeria,True,Jun-22,Group J
+Argentina,Jordan,81.0,12.4,6.6,Argentina,81.0,Argentina,True,Jun-27,Group J
+Algeria,Austria,37.3,29.4,33.3,Austria,37.3,Draw,False,Jun-27,Group J
+Portugal,Uzbekistan,82.6,11.8,5.6,Portugal,82.6,Portugal,True,Jun-23,Group K
+Colombia,Congo DR,74.4,16.2,9.4,Colombia,74.4,Colombia,True,Jun-23,Group K
+Colombia,Portugal,28.2,21.3,50.5,Portugal,50.5,Draw,False,Jun-28,Group K
+Congo DR,Uzbekistan,54.0,27.6,18.4,Congo DR,54.0,Congo DR,True,Jun-27,Group K
+England,Ghana,64.8,22.4,12.8,England,64.8,Draw,False,Jun-23,Group L
+Panama,Croatia,21.4,13.4,65.2,Croatia,65.2,Croatia,True,Jun-23,Group L
+Panama,England,14.8,12.5,72.7,England,72.7,England,True,Jun-27,Group L
+Croatia,Ghana,70.3,18.6,11.1,Croatia,70.3,Croatia,True,Jun-27,Group L
+Canada,South Africa,71.2,18.4,10.4,Canada,71.2,Canada,True,Jun-28,Round of 32
+Brazil,Japan,71.2,18.4,10.4,Brazil,71.2,Brazil,True,Jun-29,Round of 32
+Germany,Paraguay,67.2,22.4,10.4,Germany,67.2,Paraguay,False,Jun-29,Round of 32
+Netherlands,Morocco,42.6,24.6,32.8,Netherlands,42.6,Morocco,False,Jun-29,Round of 32
+Norway,Cote d'Ivoire,72.4,18.2,9.4,Norway,72.4,Norway,True,Jun-30,Round of 32
+France,Sweden,78.2,14.6,7.2,France,78.2,France,True,Jun-30,Round of 32
+Mexico,Ecuador,58.4,24.8,16.8,Mexico,58.4,Mexico,True,Jun-30,Round of 32
+England,Congo DR,74.2,16.4,9.4,England,74.2,England,True,Jul-1,Round of 32
+Belgium,Senegal,62.8,22.4,14.8,Belgium,62.8,Belgium,True,Jul-1,Round of 32
+United States,Bosnia and Herzegovina,64.2,21.4,14.4,United States,64.2,United States,True,Jul-1,Round of 32
+Spain,Austria,78.4,14.2,7.4,Spain,78.4,Spain,True,Jul-2,Round of 32
+Portugal,Croatia,58.4,24.6,17.0,Portugal,58.4,Portugal,True,Jul-2,Round of 32
+Switzerland,Algeria,62.4,22.4,15.2,Switzerland,62.4,Switzerland,True,Jul-2,Round of 32
+Egypt,Australia,38.4,24.6,37.0,Draw,38.4,Egypt,False,Jul-3,Round of 32
+Argentina,Cabo Verde,87.3,8.3,4.5,Argentina,87.3,Argentina,True,Jul-3,Round of 32
+Colombia,Ghana,74.4,16.2,9.4,Colombia,74.4,Colombia,True,Jul-3,Round of 32
+Morocco,Canada,52.4,28.6,19.0,Morocco,52.4,Morocco,True,Jul-4,Round of 32
+Brazil,Norway,24.5,31.9,43.6,Norway,43.6,,,Jul-5,Round of 16
+Mexico,England,19.8,34.5,45.7,England,45.7,,,Jul-5,Round of 16
+Portugal,Spain,17.5,41.6,40.9,Draw,41.6,,,Jul-6,Round of 16
+United States,Belgium,15.5,26.9,57.6,Belgium,57.6,,,Jul-6,Round of 16
+Argentina,Egypt,55.4,32.0,12.6,Argentina,55.4,,,Jul-7,Round of 16
+Switzerland,Colombia,23.5,31.3,45.2,Colombia,45.2,,,Jul-7,Round of 16
+France,Morocco,50.0,33.8,16.2,France,50.0,,,Jul-9,Round of 16
