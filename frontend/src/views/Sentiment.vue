@@ -1,227 +1,205 @@
 <template>
   <div class="sentiment-page">
 
-    <!-- ── Hero ── -->
-    <div class="page-hero">
+    <!-- ── Page header ── -->
+    <div class="page-header">
       <div>
-        <h1 class="page-title">Sentiment Pulse</h1>
-        <p class="tagline">Real-time social media sentiment from Reddit and Twitter/X — what fans are saying during WC 2026 matches.</p>
+        <p class="label">Sentiment pulse</p>
+        <h1 class="page-title">Fan Reaction</h1>
+        <p class="page-desc">Real-time posts from Reddit analysed with VADER — purpose-built for social media text. Updated on demand.</p>
       </div>
-      <div class="source-badges" v-if="stats">
-        <span class="src-badge" :class="stats.reddit_configured ? 'live' : 'off'">
-          <span class="src-dot" />
-          Reddit {{ stats.reddit_configured ? 'Live' : 'Not configured' }}
-        </span>
-        <span class="src-badge" :class="stats.twitter_configured ? 'live' : 'off'">
-          <span class="src-dot" />
-          Twitter/X {{ stats.twitter_configured ? 'Live' : 'Optional' }}
-        </span>
+      <div class="src-status">
+        <div class="src-row">
+          <span class="src-dot" :class="stats?.reddit_configured ? 'live' : 'off'"></span>
+          <span class="label">Reddit {{ stats?.reddit_configured ? 'CONNECTED' : 'OFFLINE' }}</span>
+        </div>
+        <div class="src-row">
+          <span class="src-dot" :class="stats?.twitter_configured ? 'live' : 'off'"></span>
+          <span class="label">Twitter/X {{ stats?.twitter_configured ? 'CONNECTED' : 'OPTIONAL' }}</span>
+        </div>
       </div>
-    </div>
-
-    <!-- ── Setup notice if Reddit not configured ── -->
-    <div class="setup-card card" v-if="stats && !stats.reddit_configured">
-      <p class="setup-title">⚙️ Reddit API not configured</p>
-      <p class="setup-desc">
-        Add your Reddit credentials to <code>backend/.env</code> to enable live sentiment collection.
-        Follow the instructions in <code>.env.example</code> — takes about 2 minutes.
-      </p>
-      <ol class="setup-steps">
-        <li>Go to <strong>reddit.com/prefs/apps</strong> → create a "script" app</li>
-        <li>Copy <code>client_id</code> and <code>client_secret</code></li>
-        <li>Paste them into <code>backend/.env</code></li>
-        <li>Restart the backend</li>
-      </ol>
     </div>
 
     <!-- ── Controls ── -->
-    <div class="card controls-card">
-      <p class="eyebrow">Select a match</p>
+    <section class="controls-section zone">
       <div class="controls-row">
-        <input
-          v-model="matchSearch"
-          list="match-list"
-          placeholder="Search a match (e.g. Brazil vs Scotland)…"
-          class="match-input"
-          @change="onMatchSelect"
-        />
-        <datalist id="match-list">
-          <option v-for="m in availableMatches" :key="m" :value="m" />
-        </datalist>
-
-        <div class="source-toggle">
-          <button class="src-toggle-btn" :class="{ active: sources.includes('reddit') }"
-            @click="toggleSource('reddit')">Reddit</button>
-          <button class="src-toggle-btn" :class="{ active: sources.includes('twitter') }"
-            @click="toggleSource('twitter')">Twitter/X</button>
+        <div class="match-field">
+          <p class="label" style="margin-bottom:5px">Match or topic</p>
+          <input
+            v-model="matchSearch"
+            list="match-datalist"
+            placeholder="e.g. Brazil vs Norway"
+            class="match-input"
+            @change="onMatchSelect"
+          />
+          <datalist id="match-datalist">
+            <option v-for="m in availableMatches" :key="m" :value="m" />
+          </datalist>
         </div>
 
-        <button class="btn-refresh" :disabled="!selectedMatch || refreshing" @click="refresh">
-          <span v-if="refreshing" class="spinner" />
-          <span v-else>↻ Fetch sentiment</span>
-        </button>
+        <div class="source-toggles">
+          <p class="label" style="margin-bottom:5px">Sources</p>
+          <div class="toggle-row">
+            <button class="src-toggle"
+              :class="{ active: sources.includes('reddit') }"
+              @click="toggleSrc('reddit')">Reddit</button>
+            <button class="src-toggle"
+              :class="{ active: sources.includes('twitter') }"
+              @click="toggleSrc('twitter')">Twitter/X</button>
+          </div>
+        </div>
+
+        <div class="fetch-col">
+          <p class="label" style="margin-bottom:5px">
+            <span v-if="lastFetched">Last: {{ lastFetched }}</span>
+            <span v-else>Ready</span>
+          </p>
+          <button class="btn-fetch"
+            :disabled="!selectedMatch || refreshing"
+            @click="refresh">
+            <span v-if="refreshing" class="loading-dot"></span>
+            <span v-else>↻ FETCH</span>
+          </button>
+        </div>
       </div>
-      <p class="last-updated" v-if="lastRefreshed">Last fetched: {{ lastRefreshed }}</p>
-    </div>
+    </section>
 
     <!-- ── Pulse stats ── -->
-    <div class="stats-row" v-if="stats && stats.total > 0">
-      <div class="pulse-card pos">
-        <div class="pulse-val">{{ positivePercent }}%</div>
-        <div class="pulse-label">😊 Positive</div>
+    <div class="pulse-row" v-if="stats && stats.total > 0">
+      <div class="pulse-card">
+        <div class="pulse-val pitch">{{ positivePercent }}%</div>
+        <div class="label">Positive</div>
         <div class="pulse-count">{{ stats.positive }} posts</div>
       </div>
-      <div class="pulse-card neu">
-        <div class="pulse-val">{{ neutralPercent }}%</div>
-        <div class="pulse-label">😐 Neutral</div>
+      <div class="pulse-card">
+        <div class="pulse-val muted">{{ neutralPercent }}%</div>
+        <div class="label">Neutral</div>
         <div class="pulse-count">{{ stats.neutral }} posts</div>
       </div>
-      <div class="pulse-card neg">
-        <div class="pulse-val">{{ negativePercent }}%</div>
-        <div class="pulse-label">😤 Negative</div>
+      <div class="pulse-card">
+        <div class="pulse-val foul">{{ negativePercent }}%</div>
+        <div class="label">Negative</div>
         <div class="pulse-count">{{ stats.negative }} posts</div>
       </div>
-      <div class="pulse-card avg">
+      <div class="pulse-card score-card">
         <div class="pulse-val" :style="{ color: scoreColor(stats.avg_score) }">
           {{ stats.avg_score > 0 ? '+' : '' }}{{ stats.avg_score.toFixed(2) }}
         </div>
-        <div class="pulse-label">Avg sentiment score</div>
-        <div class="pulse-count">−1.0 = max negative · +1.0 = max positive</div>
+        <div class="label">Avg VADER score</div>
+        <div class="pulse-count">−1.0 → +1.0 scale</div>
       </div>
     </div>
 
     <!-- ── Sentiment bar ── -->
-    <div class="sentiment-bar-wrap card" v-if="stats && stats.total > 0">
-      <p class="eyebrow" style="margin-bottom:0.75rem">Sentiment distribution</p>
-      <div class="sentiment-bar">
-        <div class="bar-seg pos" :style="{ width: positivePercent + '%' }" :title="`${positivePercent}% positive`" />
-        <div class="bar-seg neu" :style="{ width: neutralPercent  + '%' }" :title="`${neutralPercent}% neutral`" />
-        <div class="bar-seg neg" :style="{ width: negativePercent + '%' }" :title="`${negativePercent}% negative`" />
+    <div class="sent-bar-wrap" v-if="stats && stats.total > 0">
+      <div class="sent-bar">
+        <div class="sent-seg" style="background:var(--pitch)"
+          :style="{ width: positivePercent + '%' }" :title="`${positivePercent}% positive`"></div>
+        <div class="sent-seg" style="background:var(--chalk-3)"
+          :style="{ width: neutralPercent + '%' }" :title="`${neutralPercent}% neutral`"></div>
+        <div class="sent-seg" style="background:var(--foul)"
+          :style="{ width: negativePercent + '%' }" :title="`${negativePercent}% negative`"></div>
       </div>
-      <div class="bar-legend">
-        <span><span class="leg-dot pos" />Positive {{ positivePercent }}%</span>
-        <span><span class="leg-dot neu" />Neutral {{ neutralPercent }}%</span>
-        <span><span class="leg-dot neg" />Negative {{ negativePercent }}%</span>
-        <span class="total-count">{{ stats.total }} total posts</span>
+      <div class="sent-legend">
+        <span><span class="leg pitch"></span>Positive {{ positivePercent }}%</span>
+        <span><span class="leg muted-leg"></span>Neutral {{ neutralPercent }}%</span>
+        <span><span class="leg foul"></span>Negative {{ negativePercent }}%</span>
+        <span class="total-posts">{{ stats.total }} total posts</span>
       </div>
     </div>
 
     <!-- ── Trend chart ── -->
-    <div class="card" v-if="trend.length > 0">
-      <p class="eyebrow" style="margin-bottom:1rem">Hourly trend (last 24h)</p>
-      <div style="height:220px;position:relative">
+    <section class="chart-section zone" v-if="trend.length > 0">
+      <p class="label" style="margin-bottom:1rem">Hourly trend (last 24h)</p>
+      <div style="height:200px;position:relative">
         <canvas ref="trendCanvas" />
       </div>
-    </div>
+    </section>
 
     <!-- ── Feed ── -->
-    <div class="card feed-card" v-if="feed.length > 0">
-      <div class="feed-header">
-        <p class="eyebrow">Live feed</p>
+    <section class="feed-section" v-if="feed.length > 0">
+      <div class="feed-head">
+        <p class="label">Live feed</p>
         <div class="feed-filters">
-          <button class="feed-filter" :class="{ active: feedFilter === 'all' }"    @click="feedFilter = 'all'">All</button>
-          <button class="feed-filter" :class="{ active: feedFilter === 'POSITIVE' }" @click="feedFilter = 'POSITIVE'">😊</button>
-          <button class="feed-filter" :class="{ active: feedFilter === 'NEUTRAL' }"  @click="feedFilter = 'NEUTRAL'">😐</button>
-          <button class="feed-filter" :class="{ active: feedFilter === 'NEGATIVE' }" @click="feedFilter = 'NEGATIVE'">😤</button>
+          <button class="feed-filter" :class="{ active: feedFilter === 'all' }"    @click="feedFilter = 'all'">ALL</button>
+          <button class="feed-filter pitch-f" :class="{ active: feedFilter === 'POSITIVE' }" @click="feedFilter = 'POSITIVE'">POS</button>
+          <button class="feed-filter muted-f" :class="{ active: feedFilter === 'NEUTRAL' }"  @click="feedFilter = 'NEUTRAL'">NEU</button>
+          <button class="feed-filter foul-f"  :class="{ active: feedFilter === 'NEGATIVE' }" @click="feedFilter = 'NEGATIVE'">NEG</button>
         </div>
       </div>
 
       <div class="feed-list">
-        <div v-for="item in filteredFeed" :key="item.id" class="feed-item" :class="item.label.toLowerCase()">
-          <div class="feed-meta">
-            <span class="feed-source" :class="item.source">{{ item.source }}</span>
-            <span class="feed-label" :class="item.label.toLowerCase()">
-              {{ item.label === 'POSITIVE' ? '😊' : item.label === 'NEGATIVE' ? '😤' : '😐' }}
+        <div v-for="item in filteredFeed" :key="item.id"
+          class="feed-item"
+          :class="item.label.toLowerCase()">
+          <div class="feed-top">
+            <span class="src-chip" :class="item.source">{{ item.source }}</span>
+            <span class="sent-chip" :class="item.label.toLowerCase()">
+              {{ item.label === 'POSITIVE' ? '↑' : item.label === 'NEGATIVE' ? '↓' : '—' }}
               {{ item.label }}
             </span>
-            <span class="feed-score">{{ item.score > 0 ? '+' : '' }}{{ item.score }}</span>
+            <span class="vader-score">{{ item.score > 0 ? '+' : '' }}{{ item.score }}</span>
+            <a v-if="item.url" :href="item.url" target="_blank" class="post-link">↗</a>
           </div>
           <p class="feed-text">{{ item.text }}</p>
-          <div class="feed-footer">
-            <span class="feed-author">u/{{ item.author }}</span>
-            <a v-if="item.url" :href="item.url" target="_blank" class="feed-link">View post ↗</a>
-          </div>
+          <span class="feed-author">{{ item.source === 'reddit' ? 'u/' : '@' }}{{ item.author }}</span>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- ── Empty state ── -->
-    <div class="empty-state card" v-else-if="!refreshing && selectedMatch">
+    <!-- ── Empty states ── -->
+    <div class="empty-state" v-else-if="!refreshing && selectedMatch">
       <p class="empty-icon">📡</p>
       <p class="empty-title">No posts collected yet</p>
-      <p class="empty-desc">Click "Fetch sentiment" to collect posts about <strong>{{ selectedMatch }}</strong> from Reddit and Twitter.</p>
+      <p class="empty-sub">Click FETCH to collect posts about <strong>{{ selectedMatch }}</strong></p>
     </div>
-
-    <div class="empty-state card" v-else-if="!selectedMatch">
-      <p class="empty-icon">🔍</p>
-      <p class="empty-title">Select a match to begin</p>
-      <p class="empty-desc">Choose a WC 2026 match above to start tracking what fans are saying in real time.</p>
+    <div class="empty-state" v-else-if="!selectedMatch">
+      <p class="empty-icon">⚽</p>
+      <p class="empty-title">Select a match above</p>
+      <p class="empty-sub">Choose any WC 2026 match or type a topic to start tracking fan sentiment</p>
     </div>
 
   </div>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import axios from 'axios'
 import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Filler, Tooltip } from 'chart.js'
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Filler, Tooltip)
 
-const stats        = ref(null)
-const feed         = ref([])
-const trend        = ref([])
-const matchSearch  = ref('')
+const stats         = ref(null)
+const feed          = ref([])
+const trend         = ref([])
+const matchSearch   = ref('')
 const selectedMatch = ref('')
-const sources      = ref(['reddit'])
-const refreshing   = ref(false)
-const feedFilter   = ref('all')
-const lastRefreshed = ref('')
-const trendCanvas  = ref(null)
-let trendChart     = null
-let autoTimer      = null
-
-// WC 2026 matches for the datalist
+const sources       = ref(['reddit'])
+const refreshing    = ref(false)
+const feedFilter    = ref('all')
+const lastFetched   = ref('')
+const trendCanvas   = ref(null)
 const availableMatches = ref([])
+let trendChart = null
+let autoTimer  = null
 
-const positivePercent = computed(() => {
-  if (!stats.value || stats.value.total === 0) return 0
-  return Math.round(stats.value.positive / stats.value.total * 100)
-})
-const neutralPercent = computed(() => {
-  if (!stats.value || stats.value.total === 0) return 0
-  return Math.round(stats.value.neutral / stats.value.total * 100)
-})
-const negativePercent = computed(() => {
-  if (!stats.value || stats.value.total === 0) return 0
-  return Math.round(stats.value.negative / stats.value.total * 100)
-})
+const positivePercent = computed(() => stats.value?.total ? Math.round(stats.value.positive / stats.value.total * 100) : 0)
+const neutralPercent  = computed(() => stats.value?.total ? Math.round(stats.value.neutral  / stats.value.total * 100) : 0)
+const negativePercent = computed(() => stats.value?.total ? Math.round(stats.value.negative / stats.value.total * 100) : 0)
+const filteredFeed    = computed(() => feedFilter.value === 'all' ? feed.value : feed.value.filter(i => i.label === feedFilter.value))
 
-const filteredFeed = computed(() => {
-  if (feedFilter.value === 'all') return feed.value
-  return feed.value.filter(i => i.label === feedFilter.value)
-})
-
-function scoreColor(score) {
-  if (score > 0.1) return 'var(--green)'
-  if (score < -0.1) return 'var(--coral)'
-  return 'var(--muted)'
+function scoreColor(s) {
+  if (s > 0.1)  return 'var(--pitch)'
+  if (s < -0.1) return 'var(--foul)'
+  return 'var(--chalk-3)'
 }
-
-function toggleSource(src) {
-  if (sources.value.includes(src)) {
-    if (sources.value.length > 1) sources.value = sources.value.filter(s => s !== src)
-  } else {
-    sources.value.push(src)
-  }
+function toggleSrc(s) {
+  if (sources.value.includes(s)) { if (sources.value.length > 1) sources.value = sources.value.filter(x => x !== s) }
+  else sources.value.push(s)
 }
-
 function onMatchSelect() {
-  const match = availableMatches.value.find(
-    m => m.toLowerCase() === matchSearch.value.toLowerCase()
-  )
-  if (match) selectedMatch.value = match
-  else selectedMatch.value = matchSearch.value  // allow free-text too
+  const m = availableMatches.value.find(x => x.toLowerCase() === matchSearch.value.toLowerCase())
+  selectedMatch.value = m || matchSearch.value
 }
 
 async function refresh() {
@@ -232,75 +210,62 @@ async function refresh() {
       params: { match_tag: selectedMatch.value, sources: sources.value.join(',') }
     })
     await loadData()
-    lastRefreshed.value = new Date().toLocaleTimeString()
-  } catch (e) {
-    alert('Refresh failed — is the backend running?')
-  } finally {
-    refreshing.value = false
-  }
+    lastFetched.value = new Date().toLocaleTimeString()
+  } catch { alert('Refresh failed — check backend is running') }
+  finally { refreshing.value = false }
 }
 
 async function loadData() {
-  const [statsRes, feedRes, trendRes] = await Promise.all([
+  const [sr, fr, tr] = await Promise.all([
     axios.get('/api/v1/sentiment/stats',  { params: { match_tag: selectedMatch.value || undefined } }),
     axios.get('/api/v1/sentiment/feed',   { params: { match_tag: selectedMatch.value || undefined, limit: 40 } }),
     axios.get('/api/v1/sentiment/trend',  { params: { match_tag: selectedMatch.value || undefined } }),
   ])
-  stats.value = statsRes.data
-  feed.value  = feedRes.data
-  trend.value = trendRes.data
-
-  // Populate available matches from DB tags + predictions
-  if (statsRes.data.match_tags?.length) {
-    availableMatches.value = [...new Set([...availableMatches.value, ...statsRes.data.match_tags])]
-  }
-
-  buildTrendChart()
+  stats.value = sr.data
+  feed.value  = fr.data
+  trend.value = tr.data
+  if (sr.data.match_tags?.length)
+    availableMatches.value = [...new Set([...availableMatches.value, ...sr.data.match_tags])]
+  buildTrend()
 }
 
-function buildTrendChart() {
+function buildTrend() {
   if (trendChart) { trendChart.destroy(); trendChart = null }
-  if (!trendCanvas.value || trend.value.length === 0) return
-
+  if (!trendCanvas.value || !trend.value.length) return
   trendChart = new Chart(trendCanvas.value, {
     type: 'line',
     data: {
       labels: trend.value.map(t => t.hour),
       datasets: [
-        { label: 'Positive', data: trend.value.map(t => t.positive), borderColor: '#0acf83', backgroundColor: 'rgba(10,207,131,0.07)', fill: true, tension: 0.4, borderWidth: 2 },
-        { label: 'Negative', data: trend.value.map(t => t.negative), borderColor: '#ff7262', backgroundColor: 'rgba(255,114,98,0.07)',  fill: true, tension: 0.4, borderWidth: 2 },
-        { label: 'Neutral',  data: trend.value.map(t => t.neutral),  borderColor: '#f5a623', backgroundColor: 'rgba(245,166,35,0.07)', fill: true, tension: 0.4, borderWidth: 2 },
+        { label: 'Positive', data: trend.value.map(t => t.positive), borderColor: '#00A651', backgroundColor: 'rgba(0,166,81,0.06)', fill: true, tension: 0.4, borderWidth: 1.5, pointRadius: 2 },
+        { label: 'Negative', data: trend.value.map(t => t.negative), borderColor: '#E8162B', backgroundColor: 'rgba(232,22,43,0.06)', fill: true, tension: 0.4, borderWidth: 1.5, pointRadius: 2 },
+        { label: 'Neutral',  data: trend.value.map(t => t.neutral),  borderColor: '#5A6E60', backgroundColor: 'rgba(90,110,96,0.06)', fill: true, tension: 0.4, borderWidth: 1.5, pointRadius: 2 },
       ],
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: {
-        legend: { labels: { color: '#6b6b88', font: { size: 11 }, boxWidth: 10 } },
-        tooltip: { backgroundColor: '#10101a', borderColor: '#1e1e32', borderWidth: 1, titleColor: '#e8e8f0', bodyColor: '#6b6b88' },
+        legend: { labels: { color: '#5A6E60', font: { size: 10, family: 'JetBrains Mono' }, boxWidth: 8, padding: 16 } },
+        tooltip: { backgroundColor: '#0C1410', borderColor: '#1C2E22', borderWidth: 1, titleColor: '#F0F2EE', bodyColor: '#5A6E60' },
       },
       scales: {
-        x: { ticks: { color: '#6b6b88', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
-        y: { ticks: { color: '#6b6b88', font: { size: 10 }, stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.04)' }, min: 0 },
+        x: { ticks: { color: '#5A6E60', font: { size: 9, family: 'JetBrains Mono' } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+        y: { ticks: { color: '#5A6E60', font: { size: 9 }, stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.04)' }, min: 0 },
       },
     },
   })
 }
 
-// Load predictions list for match suggestions
 async function loadMatchList() {
   try {
     const { data } = await axios.get('/api/v1/predictions')
-    const matches = data.map(p => `${p.team_a} vs ${p.team_b}`)
-    availableMatches.value = [...new Set(matches)]
+    availableMatches.value = [...new Set(data.map(p => `${p.team_a} vs ${p.team_b}`))]
   } catch {}
 }
 
 onMounted(async () => {
   await Promise.all([loadData(), loadMatchList()])
-  // Auto-refresh every 5 minutes if a match is selected
-  autoTimer = setInterval(() => {
-    if (selectedMatch.value) loadData()
-  }, 5 * 60 * 1000)
+  autoTimer = setInterval(() => { if (selectedMatch.value) loadData() }, 5 * 60 * 1000)
 })
 
 onBeforeUnmount(() => {
@@ -310,129 +275,144 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-.sentiment-page { display: flex; flex-direction: column; gap: 1.5rem; animation: rise 0.3s ease; }
+.sentiment-page { display: flex; flex-direction: column; gap: 2rem; animation: rise 0.4s ease; }
 
-/* Hero */
-.page-hero { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
-.tagline   { font-size: 0.875rem; color: var(--muted); max-width: 520px; line-height: 1.5; margin-top: 0.35rem; }
+.page-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
+.page-title  { font-family: var(--display); font-size: 3rem; letter-spacing: 0.04em; color: var(--chalk); margin: 0.25rem 0 0.5rem; line-height: 1; }
+.page-desc   { font-size: 0.8rem; color: var(--chalk-3); max-width: 480px; line-height: 1.55; }
 
-.source-badges { display: flex; gap: 0.5rem; align-items: flex-start; flex-wrap: wrap; }
-.src-badge {
-  display: flex; align-items: center; gap: 6px;
-  font-family: var(--mono); font-size: 0.68rem; font-weight: 600;
-  padding: 4px 10px; border-radius: 99px; border: 1px solid;
-}
-.src-badge.live { background: rgba(10,207,131,0.1); color: var(--green); border-color: rgba(10,207,131,0.3); }
-.src-badge.off  { background: rgba(107,107,136,0.1); color: var(--muted); border-color: var(--border); }
-.src-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-
-/* Setup card */
-.setup-card { border-left: 3px solid var(--gold); }
-.setup-title { font-weight: 700; margin-bottom: 0.5rem; }
-.setup-desc  { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.75rem; line-height: 1.55; }
-.setup-steps { font-size: 0.78rem; color: var(--muted); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 4px; }
-.setup-steps code { background: var(--surface2); padding: 1px 5px; border-radius: 4px; font-family: var(--mono); font-size: 0.72rem; }
+.src-status { display: flex; flex-direction: column; gap: 6px; padding-top: 0.5rem; }
+.src-row    { display: flex; align-items: center; gap: 7px; }
+.src-dot    { width: 7px; height: 7px; border-radius: 50%; }
+.src-dot.live { background: var(--pitch); }
+.src-dot.off  { background: var(--chalk-3); }
 
 /* Controls */
+.controls-section { padding: 1.5rem; }
 .controls-row {
-  display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.75rem;
+  display: flex; align-items: flex-end; gap: 2rem; flex-wrap: wrap;
 }
+
+.match-field { flex: 1; min-width: 200px; }
 .match-input {
-  flex: 1; min-width: 200px;
-  background: var(--surface2); border: 1.5px solid var(--border);
-  color: var(--text); padding: 0.6rem 1rem; border-radius: var(--r);
-  font-family: var(--font); font-size: 0.875rem; transition: border-color 0.2s;
+  width: 100%; background: transparent;
+  border: none; border-bottom: 2px solid var(--border);
+  color: var(--chalk); font-family: var(--body); font-size: 0.95rem;
+  padding: 6px 0; transition: border-color 0.2s;
 }
-.match-input:focus { outline: none; border-color: var(--gold); }
+.match-input:focus { outline: none; border-bottom-color: var(--pitch); }
+.match-input::placeholder { color: var(--chalk-3); }
 
-.source-toggle { display: flex; gap: 4px; }
-.src-toggle-btn {
-  background: none; border: 1px solid var(--border); color: var(--muted);
-  padding: 6px 12px; border-radius: 99px; font-size: 0.75rem;
-  font-family: var(--font); cursor: pointer; transition: all 0.15s;
+.toggle-row { display: flex; gap: 2px; }
+.src-toggle {
+  background: none; border: 1px solid var(--border); color: var(--chalk-3);
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+  padding: 5px 12px; cursor: pointer; transition: all 0.15s;
 }
-.src-toggle-btn.active { background: var(--gold-dim); color: var(--gold); border-color: var(--gold); }
+.src-toggle.active { background: var(--pitch-l); border-color: var(--pitch); color: var(--pitch); }
 
-.btn-refresh {
-  background: var(--gold); color: #07070f; border: none;
-  padding: 0.6rem 1.25rem; border-radius: var(--r);
-  font-weight: 700; font-size: 0.875rem; cursor: pointer;
-  font-family: var(--font); display: flex; align-items: center; gap: 6px;
-  white-space: nowrap; transition: opacity 0.15s;
+.btn-fetch {
+  background: var(--pitch); color: var(--void); border: none;
+  font-family: var(--display); font-size: 1rem; letter-spacing: 0.1em;
+  padding: 7px 20px; cursor: pointer; white-space: nowrap;
+  transition: background 0.15s, opacity 0.15s;
+  display: flex; align-items: center; gap: 6px;
 }
-.btn-refresh:hover:not(:disabled) { opacity: 0.85; }
-.btn-refresh:disabled { opacity: 0.4; cursor: not-allowed; }
-
-.last-updated { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); margin-top: 0.5rem; }
+.btn-fetch:hover:not(:disabled) { background: var(--chalk); }
+.btn-fetch:disabled { opacity: 0.35; cursor: not-allowed; }
 
 /* Pulse stats */
-.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.875rem; }
-.pulse-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--r); padding: 1.25rem; text-align: center;
-  border-top: 3px solid transparent;
+.pulse-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px;
+  background: var(--border); border: 1px solid var(--border);
 }
-.pulse-card.pos { border-top-color: var(--green); }
-.pulse-card.neu { border-top-color: var(--neu); }
-.pulse-card.neg { border-top-color: var(--coral); }
-.pulse-card.avg { border-top-color: var(--blue); }
-.pulse-val   { font-size: 2rem; font-weight: 900; letter-spacing: -0.04em; }
-.pulse-label { font-size: 0.8rem; color: var(--muted); margin: 4px 0; }
-.pulse-count { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); }
+.pulse-card {
+  background: var(--void); padding: 1.25rem; display: flex; flex-direction: column; gap: 4px;
+  transition: background 0.15s;
+}
+.pulse-card:hover { background: var(--surface); }
+.score-card { border-left: 1px solid var(--border); }
+.pulse-val  { font-family: var(--display); font-size: 2.5rem; letter-spacing: 0.02em; line-height: 1; }
+.pulse-val.pitch { color: var(--pitch); }
+.pulse-val.muted { color: var(--chalk-2); }
+.pulse-val.foul  { color: var(--foul); }
+.pulse-count { font-family: var(--mono); font-size: 0.62rem; color: var(--chalk-3); }
 
 /* Sentiment bar */
-.sentiment-bar {
-  height: 12px; border-radius: 99px; overflow: hidden;
-  display: flex; gap: 2px; margin-bottom: 0.75rem;
+.sent-bar-wrap { }
+.sent-bar {
+  height: 8px; display: flex; gap: 1px; margin-bottom: 0.5rem;
 }
-.bar-seg { height: 100%; border-radius: 99px; transition: width 0.8s ease; }
-.bar-seg.pos { background: var(--green); }
-.bar-seg.neu { background: var(--neu); }
-.bar-seg.neg { background: var(--coral); }
-.bar-legend  { display: flex; gap: 1.25rem; font-size: 0.75rem; color: var(--muted); flex-wrap: wrap; align-items: center; }
-.leg-dot     { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
-.leg-dot.pos { background: var(--green); }
-.leg-dot.neu { background: var(--neu); }
-.leg-dot.neg { background: var(--coral); }
-.total-count { margin-left: auto; font-family: var(--mono); font-size: 0.68rem; }
+.sent-seg { height: 100%; transition: width 0.8s ease; }
+.sent-legend {
+  display: flex; gap: 1.25rem; font-family: var(--mono); font-size: 10px;
+  color: var(--chalk-3); align-items: center; flex-wrap: wrap;
+}
+.leg { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+.leg.pitch    { background: var(--pitch); }
+.leg.muted-leg{ background: var(--chalk-3); }
+.leg.foul     { background: var(--foul); }
+.total-posts  { margin-left: auto; }
+
+/* Chart */
+.chart-section { padding: 1.25rem; }
 
 /* Feed */
-.feed-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-.feed-filters { display: flex; gap: 4px; }
+.feed-section { }
+.feed-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.875rem; }
+.feed-filters { display: flex; gap: 2px; }
 .feed-filter {
-  background: none; border: 1px solid var(--border); color: var(--muted);
-  padding: 3px 10px; border-radius: 99px; font-size: 0.72rem;
-  cursor: pointer; font-family: var(--font); transition: all 0.15s;
+  background: none; border: 1px solid var(--border); color: var(--chalk-3);
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  padding: 4px 9px; cursor: pointer; transition: all 0.15s;
 }
-.feed-filter.active { background: var(--gold-dim); color: var(--gold); border-color: var(--gold); }
+.feed-filter.active { border-color: var(--chalk-3); color: var(--chalk); }
+.feed-filter.active.pitch-f { border-color: var(--pitch); color: var(--pitch); background: var(--pitch-l); }
+.feed-filter.active.foul-f  { border-color: var(--foul);  color: var(--foul);  background: rgba(232,22,43,0.08); }
 
-.feed-list  { display: flex; flex-direction: column; gap: 0.75rem; }
-.feed-item  {
-  background: var(--surface2); border: 1px solid var(--border);
-  border-left: 3px solid transparent; border-radius: var(--r); padding: 1rem;
+.feed-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+
+.feed-item {
+  background: var(--void); padding: 1rem;
+  border-left: 3px solid transparent;
+  transition: background 0.1s;
 }
-.feed-item.positive { border-left-color: var(--green); }
-.feed-item.negative { border-left-color: var(--coral); }
-.feed-item.neutral  { border-left-color: var(--neu); }
+.feed-item:hover     { background: var(--surface); }
+.feed-item.positive  { border-left-color: var(--pitch); }
+.feed-item.negative  { border-left-color: var(--foul); }
+.feed-item.neutral   { border-left-color: var(--border); }
 
-.feed-meta   { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; flex-wrap: wrap; }
-.feed-source { font-family: var(--mono); font-size: 0.65rem; padding: 2px 7px; border-radius: 4px; font-weight: 600; }
-.feed-source.reddit  { background: rgba(255,69,0,0.12); color: #ff4500; }
-.feed-source.twitter { background: rgba(26,188,254,0.12); color: var(--blue); }
-.feed-label  { font-family: var(--mono); font-size: 0.68rem; font-weight: 600; }
-.feed-label.positive { color: var(--green); }
-.feed-label.negative { color: var(--coral); }
-.feed-label.neutral  { color: var(--neu); }
-.feed-score  { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); margin-left: auto; }
-.feed-text   { font-size: 0.85rem; color: var(--muted); line-height: 1.55; margin-bottom: 0.5rem; }
-.feed-footer { display: flex; justify-content: space-between; }
-.feed-author { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); }
-.feed-link   { font-family: var(--mono); font-size: 0.65rem; color: var(--gold); text-decoration: none; }
-.feed-link:hover { text-decoration: underline; }
+.feed-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+.src-chip {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+  padding: 1px 6px; border: 1px solid;
+}
+.src-chip.reddit  { color: #FF4500; border-color: rgba(255,69,0,0.3); }
+.src-chip.twitter { color: var(--chalk-2); border-color: var(--border); }
 
-/* Empty state */
-.empty-state { text-align: center; padding: 3rem; }
+.sent-chip {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; font-weight: 600;
+}
+.sent-chip.positive { color: var(--pitch); }
+.sent-chip.negative { color: var(--foul); }
+.sent-chip.neutral  { color: var(--chalk-3); }
+
+.vader-score { font-family: var(--mono); font-size: 9px; color: var(--chalk-3); margin-left: auto; }
+.post-link   { font-family: var(--mono); font-size: 9px; color: var(--chalk-3); text-decoration: none; }
+.post-link:hover { color: var(--pitch); }
+
+.feed-text   { font-size: 0.82rem; color: var(--chalk-2); line-height: 1.55; margin-bottom: 6px; }
+.feed-author { font-family: var(--mono); font-size: 0.62rem; color: var(--chalk-3); }
+
+/* Empty */
+.empty-state { text-align: center; padding: 4rem 2rem; }
 .empty-icon  { font-size: 2.5rem; margin-bottom: 0.75rem; }
-.empty-title { font-weight: 700; margin-bottom: 0.5rem; }
-.empty-desc  { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
+.empty-title { font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.06em; color: var(--chalk-2); margin-bottom: 0.5rem; }
+.empty-sub   { font-size: 0.8rem; color: var(--chalk-3); line-height: 1.5; }
+
+.loading-dot {
+  display: inline-block; width: 12px; height: 12px;
+  border: 2px solid rgba(255,255,255,0.2); border-top-color: var(--void);
+  border-radius: 50%; animation: spin 0.6s linear infinite;
+}
 </style>

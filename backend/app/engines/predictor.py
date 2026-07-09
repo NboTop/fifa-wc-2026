@@ -155,27 +155,37 @@ class MatchPredictor:
         }
 
     def get_all_predictions(self) -> list:
+        import math
         path = MODELS / "wc2026_predictions.csv"
         if not path.exists():
             return []
-        df = pd.read_csv(path)
-        df = df.where(pd.notna(df), None)   # NaN → None → JSON null
-        return df.to_dict(orient="records")
+        df      = pd.read_csv(path)
+        records = df.to_dict(orient="records")
+
+        def clean(v):
+            if isinstance(v, float) and (math.isnan(v) or math.isinf(v)):
+                return None
+            return v
+
+        return [{k: clean(v) for k, v in row.items()} for row in records]
+
 
     def get_accuracy(self) -> Dict[str, Any]:
         path = MODELS / "wc2026_predictions.csv"
         if not path.exists():
             return {"total_predictions": 0, "played": 0, "correct": 0, "accuracy": 0}
-        df     = pd.read_csv(path)
-        played = df[df["actual_result"].notna()]
-        total  = len(played)
-        correct = int(played["correct"].apply(lambda x: str(x).strip().lower() == "true").sum())
+        df      = pd.read_csv(path)
+        played  = df[df["actual_result"].notna() & (df["actual_result"] != "")]
+        total   = len(played)
+        correct = int(played["correct"].apply(
+            lambda x: str(x).strip().lower() == "true"
+        ).sum())
         return {
             "total_predictions": len(df),
-            "played":   total,
-            "correct":  correct,
-            "accuracy": round(correct / total * 100, 1) if total else 0,
-    }
+            "played":            total,
+            "correct":           correct,
+            "accuracy":          round(correct / total * 100, 1) if total else 0,
+        }
 
 
 match_predictor = MatchPredictor()
