@@ -4,19 +4,33 @@
     <!-- Live ticker -->
     <div class="ticker-bar">
       <span class="ticker-live">● LIVE</span>
-      <div class="ticker-scroll">
-        <span class="ticker-item">WC 2026</span>
-        <span class="ticker-sep">·</span>
-        <span class="ticker-item">MODEL ACCURACY <strong>71.4%</strong></span>
-        <span class="ticker-sep">·</span>
-        <span class="ticker-item">40 CORRECT FROM 56</span>
-        <span class="ticker-sep">·</span>
-        <span class="ticker-item">RF + XGBOOST + ELO RATINGS</span>
-        <span class="ticker-sep">·</span>
-        <span class="ticker-item">9,952 PLAYERS CLUSTERED</span>
-        <span class="ticker-sep">·</span>
-        <span class="ticker-item">ROUND OF 16 IN PROGRESS</span>
-        <span class="ticker-sep">·</span>
+      <div class="ticker-clip">
+        <div class="ticker-scroll">
+          <span class="ticker-item">WC 2026</span>
+          <span class="ticker-sep">·</span>
+          <span class="ticker-item">MODEL ACCURACY <strong>71.0%</strong></span>
+          <span class="ticker-sep">·</span>
+          <span class="ticker-item">44 CORRECT FROM 62</span>
+          <span class="ticker-sep">·</span>
+          <span class="ticker-item">RF + XGBOOST + ELO RATINGS</span>
+          <span class="ticker-sep">·</span>
+          <span class="ticker-item">9,952 PLAYERS CLUSTERED</span>
+          <span class="ticker-sep">·</span>
+          <span class="ticker-item">QUARTERFINALS IN PROGRESS</span>
+          <span class="ticker-sep">·</span>
+          <span class="ticker-item">WC 2026</span>
+          <span class="ticker-sep">·</span>
+          <span class="ticker-item">MODEL ACCURACY <strong>71.0%</strong></span>
+          <span class="ticker-sep">·</span>
+          <span class="ticker-item">44 CORRECT FROM 62</span>
+          <span class="ticker-sep">·</span>
+          <span class="ticker-item">RF + XGBOOST + ELO RATINGS</span>
+          <span class="ticker-sep">·</span>
+          <span class="ticker-item">9,952 PLAYERS CLUSTERED</span>
+          <span class="ticker-sep">·</span>
+          <span class="ticker-item">QUARTERFINALS IN PROGRESS</span>
+          <span class="ticker-sep">·</span>
+        </div>
       </div>
     </div>
 
@@ -98,9 +112,9 @@ body {
   background: var(--pitch);
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0 1.25rem;
+  padding-left: 1.25rem;
   overflow: hidden;
+  gap: 0;
 }
 
 .ticker-live {
@@ -111,35 +125,39 @@ body {
   letter-spacing: 0.1em;
   white-space: nowrap;
   flex-shrink: 0;
+  padding-right: 1rem;
+  margin-right: 0.5rem;
+  border-right: 1px solid rgba(0,0,0,0.2);
+  background: var(--pitch);
+  position: relative;
+  z-index: 2;
+}
+
+.ticker-clip {
+  flex: 1;
+  overflow: hidden;
+  height: 100%;
   display: flex;
   align-items: center;
-  gap: 5px;
+  position: relative;
 }
 
 .ticker-scroll {
   display: flex;
   align-items: center;
   gap: 1rem;
-  animation: ticker 30s linear infinite;
   white-space: nowrap;
+  flex-shrink: 0;
+  animation: ticker 40s linear infinite;
 }
 
-.ticker-item {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--void);
-  letter-spacing: 0.06em;
-}
-
+.ticker-item { font-family: var(--mono); font-size: 10px; color: var(--void); letter-spacing: 0.06em; }
 .ticker-item strong { font-weight: 700; }
+.ticker-sep { color: rgba(0,0,0,0.3); font-size: 10px; }
 
-.ticker-sep {
-  color: rgba(0,0,0,0.3);
-  font-size: 10px;
-}
 
 @keyframes ticker {
-  0%   { transform: translateX(0); }
+  0%   { transform: translateX(50%); }
   100% { transform: translateX(-50%); }
 }
 

@@ -9,6 +9,8 @@ qf_matches = [
     ("Norway",    "England",     "Quarterfinal", "Jul-11"),
     ("Spain",     "Belgium",     "Quarterfinal", "Jul-10"),
     ("Argentina", "Switzerland", "Quarterfinal", "Jul-11"),
+    ("France","England","Third place","Jul-18"), 
+    ("Spain","Argentina","Final","Jul-19")
 ]
 
 df = pd.read_csv(MODELS / "wc2026_predictions.csv")

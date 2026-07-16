@@ -247,9 +247,12 @@ const filteredPredictions = computed(() => {
   return list
 })
 
+function isPending(p) {
+  return !p.actual_result || p.actual_result === 'TBD' || p.actual_result === ''
+}
 function isCorrect(p) { return String(p.correct).toLowerCase() === 'true' }
 function rowClass(p) {
-  if (!p.actual_result) return 'row-pending'
+  if (isPending(p)) return 'row-pending'
   return isCorrect(p) ? 'row-correct' : 'row-wrong'
 }
 function isHighConfWrong(p) { return p.actual_result && !isCorrect(p) && p.confidence >= 65 }
