@@ -7,6 +7,7 @@ from app.routers import predictions, players
 from app.routers import sentiment as sentiment_router
 from app.db import engine, Base
 from app.sentiment_model import SentimentItem          # ensures table is registered
+from app.download_models import ensure_models_downloaded
 import logging
 
 logging.basicConfig(level=logging.INFO)
@@ -15,11 +16,10 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Create sentiment DB tables
+    ensure_models_downloaded()   # ← add this line first
     Base.metadata.create_all(bind=engine)
     logger.info("✓ Sentiment DB tables ready")
 
-    # Load ML engines
     logger.info("Loading engines...")
     match_predictor.load()
     player_analyzer.load()
