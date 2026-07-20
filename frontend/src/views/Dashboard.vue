@@ -131,6 +131,10 @@
             {{ predResult.confidence }}% confidence
           </span>
           <span class="draw-warn" v-if="predResult.draw_risk">⚖ draw risk</span>
+          <p class="knockout-note" v-if="predResult.predicted === 'Draw'">
+            ⚖ In a knockout match, this reflects the most likely 90-minute scoreline — the actual winner would be decided by extra time or penalties.
+          </p>
+          
         </div>
 
         <p class="responsible-note">Probability estimates only. Football is unpredictable — this model has been wrong 28.6% of the time across 56 tracked predictions.</p>
@@ -740,4 +744,12 @@ onMounted(async () => {
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
 }
+
+.knockout-note {
+  font-size: 0.72rem;
+  color: var(--chalk-3);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
 </style>
