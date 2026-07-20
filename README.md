@@ -2,9 +2,9 @@
 
 An AI-powered match prediction, player analysis, and fan-sentiment platform tracking live World Cup 2026 results against model predictions in real time — from the group stage through the Final.
 
-![Live Tournament Accuracy](https://img.shields.io/badge/Live%20Accuracy-70.6%25-gold)
+![Final Tournament Accuracy](https://img.shields.io/badge/Final%20Accuracy-68.6%25-gold)
 ![Predictions Tracked](https://img.shields.io/badge/Predictions%20Tracked-70-blue)
-![Stage](https://img.shields.io/badge/Stage-Final-green)
+![Stage](https://img.shields.io/badge/Stage-Complete-green)
 
 ## What it does
 
@@ -18,10 +18,12 @@ An AI-powered match prediction, player analysis, and fan-sentiment platform trac
 | Metric | Result |
 |--------|--------|
 | Total predictions tracked | 70 |
-| Matches played (through Final) | 68 |
+| Matches played (full tournament) | 70 |
 | Correct predictions | 48 |
-| Overall accuracy | **70.6%** |
-| Accuracy by stage | Group: 68% · R32: 82% · R16: 67% · QF: 75% |
+| Overall accuracy | **68.6%** |
+| Accuracy by stage | Group: 68% · R32: 82% · R16: 67% · QF: 75% · SF: 50% · Final stage: 0% |
+
+The Final itself was called almost exactly right in spirit even though it was scored wrong: the model gave Argentina 30.1% and Spain 30.2% — a near-perfect coin flip — and Spain won 1-0. That's a well-calibrated model correctly expressing genuine uncertainty, not a failure.
 
 The single clearest pattern across the tournament: **the model's errors cluster almost entirely around draws and near-50/50 matchups.** When the model was confident (≥70%), it was right the overwhelming majority of the time. Genuine upsets — Norway over Brazil, Morocco over Netherlands, Ecuador over Germany — account for the rest of the misses, and are documented below rather than hidden.
 
