@@ -8,6 +8,6 @@ joblib
 # Phase 3 — Sentiment Pulse
 tweepy==4.14.0
 vaderSentiment==3.3.2
-sqlalchemy==2.0.30
+sqlalchemy>=2.0.36
 python-dotenv==1.0.1
 huggingface_hub
