@@ -46,7 +46,7 @@ app.include_router(players.router,            prefix="/api/v1", tags=["players"]
 app.include_router(sentiment_router.router,   prefix="/api/v1", tags=["sentiment"])
 
 
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 def health():
     from app.engines.sentiment import sentiment_engine
     return {
