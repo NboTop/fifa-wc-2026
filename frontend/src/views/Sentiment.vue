@@ -109,11 +109,20 @@
     </div>
 
     <!-- ── Trend chart ── -->
-    <section class="chart-section zone" v-if="trend.length > 0">
+    <section class="chart-section zone" v-if="trend.length >= 2">
       <p class="label" style="margin-bottom:1rem">Hourly trend (last 24h)</p>
       <div style="height:200px;position:relative">
         <canvas ref="trendCanvas" />
       </div>
+    </section>
+
+    <section class="chart-section zone" v-else-if="trend.length === 1">
+      <p class="label" style="margin-bottom:0.5rem">Hourly trend (last 24h)</p>
+      <p class="trend-note">
+        All {{ trend[0].total }} posts were fetched within the same hour ({{ trend[0].hour }}).
+        A trend needs data spread across multiple hours — fetch this match again later to
+        see sentiment movement over time.
+      </p>
     </section>
 
     <!-- ── Feed ── -->
@@ -231,7 +240,7 @@ async function loadData() {
 
 function buildTrend() {
   if (trendChart) { trendChart.destroy(); trendChart = null }
-  if (!trendCanvas.value || !trend.value.length) return
+  if (!trendCanvas.value || trend.value.length < 2) return
   trendChart = new Chart(trendCanvas.value, {
     type: 'line',
     data: {
@@ -356,6 +365,12 @@ onBeforeUnmount(() => {
 
 /* Chart */
 .chart-section { padding: 1.25rem; }
+
+.trend-note {
+  font-size: 0.78rem;
+  color: var(--chalk-3);
+  line-height: 1.6;
+}
 
 /* Feed */
 .feed-section { }

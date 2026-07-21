@@ -20,9 +20,9 @@
           <span class="ticker-sep">·</span>
           <span class="ticker-item">WC 2026</span>
           <span class="ticker-sep">·</span>
-          <span class="ticker-item">MODEL ACCURACY <strong>71.0%</strong></span>
+          <span class="ticker-item">MODEL ACCURACY <strong>68.6%</strong></span>
           <span class="ticker-sep">·</span>
-          <span class="ticker-item">44 CORRECT FROM 62</span>
+          <span class="ticker-item">48 CORRECT FROM 70</span>
           <span class="ticker-sep">·</span>
           <span class="ticker-item">RF + XGBOOST + ELO RATINGS</span>
           <span class="ticker-sep">·</span>

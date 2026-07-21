@@ -20,6 +20,9 @@ from typing import Any, Dict, List, Optional
 from dotenv import load_dotenv
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
 load_dotenv()
 logger = logging.getLogger(__name__)
 
@@ -56,43 +59,72 @@ import requests as http_requests
 
 class RedditCollector:
     """
-    Uses Reddit's public JSON endpoint — no API key or app registration needed.
-    Works for reading public posts on r/worldcup, r/soccer, r/football.
+    Fetches Reddit posts via the Arctic Shift API (free, keyless Reddit
+    data mirror). Runs all target subreddits in parallel with automatic
+    retries, since very high-traffic subreddits occasionally return a
+    422 or time out on Arctic Shift's free tier.
     """
 
+    BASE_URL   = "https://arctic-shift.photon-reddit.com/api/posts/search"
     SUBREDDITS = ["worldcup", "soccer", "football"]
     HEADERS    = {"User-Agent": "wc2026-sentiment/1.0"}
+    TIMEOUT    = 15
+    RETRIES    = 2
 
     @property
     def configured(self) -> bool:
-        return True   # always available, no credentials needed
+        return True
 
-    def fetch(self, query: str, limit_per_sub: int = 10) -> List[Dict]:
-        posts = []
-        for sub in self.SUBREDDITS:
+    def _fetch_subreddit(self, sub: str, query: str, limit: int) -> List[Dict]:
+        last_error = None
+        for attempt in range(self.RETRIES):
             try:
-                url  = f"https://www.reddit.com/r/{sub}/search.json"
                 resp = http_requests.get(
-                    url,
-                    params  = {"q": query, "sort": "new", "t": "day", "limit": limit_per_sub},
-                    headers = self.HEADERS,
-                    timeout = 8,
+                    self.BASE_URL,
+                    params={
+                        "subreddit": sub,
+                        "query":     query,
+                        "sort":      "desc",
+                        "limit":     min(limit, 100),
+                    },
+                    headers=self.HEADERS,
+                    timeout=self.TIMEOUT,
                 )
                 if resp.status_code != 200:
+                    last_error = f"HTTP {resp.status_code}"
+                    time.sleep(0.5)
                     continue
-                for child in resp.json().get("data", {}).get("children", []):
-                    post = child.get("data", {})
+
+                posts = []
+                for post in resp.json().get("data", []):
                     text = f"{post.get('title','')} {post.get('selftext','')}".strip()
                     if len(text) < 12:
                         continue
+                    permalink = post.get("permalink") or f"/r/{sub}/comments/{post.get('id','')}/"
                     posts.append({
                         "source": "reddit",
                         "text":   text[:600],
-                        "url":    f"https://reddit.com{post.get('permalink','')}",
+                        "url":    f"https://reddit.com{permalink}",
                         "author": post.get("author", "[deleted]"),
                     })
+                return posts  # success — stop retrying this subreddit
+
             except Exception as exc:
-                logger.warning(f"Reddit r/{sub}: {exc}")
+                last_error = str(exc)
+                time.sleep(0.5)
+
+        logger.warning(f"Arctic Shift r/{sub}: failed after {self.RETRIES} attempts ({last_error})")
+        return []
+
+    def fetch(self, query: str, limit_per_sub: int = 10) -> List[Dict]:
+        posts = []
+        with ThreadPoolExecutor(max_workers=len(self.SUBREDDITS)) as pool:
+            futures = {
+                pool.submit(self._fetch_subreddit, sub, query, limit_per_sub): sub
+                for sub in self.SUBREDDITS
+            }
+            for future in as_completed(futures):
+                posts.extend(future.result())
         return posts
 
 
