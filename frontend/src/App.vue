@@ -28,7 +28,7 @@
           <span class="ticker-sep">·</span>
           <span class="ticker-item">9,952 PLAYERS CLUSTERED</span>
           <span class="ticker-sep">·</span>
-          <span class="ticker-item">QUARTERFINALS IN PROGRESS</span>
+          <span class="ticker-item">TOURNAMENT COMPLETE — SPAIN CHAMPIONS</span>
           <span class="ticker-sep">·</span>
         </div>
       </div>
