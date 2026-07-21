@@ -52,6 +52,12 @@
     </nav>
 
     <main><RouterView /></main>
+
+    <footer class="site-footer">
+      <span>Built by Neel</span>
+      <span class="footer-sep">·</span>
+      <a href="https://neel.my.id" target="_blank" rel="noopener">Portfolio</a>
+    </footer>
   </div>
 </template>
 
@@ -285,4 +291,27 @@ main {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+.site-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--chalk-3);
+}
+
+.footer-sep { opacity: 0.4; }
+
+.site-footer a {
+  color: var(--chalk-3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.site-footer a:hover { color: var(--pitch); }
+
 </style>
