@@ -137,5 +137,5 @@ wc2026-intelligence/
 
 ## Built by
 
-Neel Menghani — B.E. Computer Engineering, Gujarat Technological University
+Neel 
 [github.com/NboTop](https://github.com/NboTop)
