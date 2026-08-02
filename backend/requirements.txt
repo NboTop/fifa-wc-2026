@@ -11,3 +11,5 @@ vaderSentiment==3.3.2
 sqlalchemy>=2.0.36
 python-dotenv==1.0.1
 huggingface_hub
+pytest
+httpx
